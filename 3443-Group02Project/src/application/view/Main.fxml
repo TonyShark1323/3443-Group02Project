@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
+   <children>
+      <Button fx:id="buttonSearchCadet" alignment="CENTER" contentDisplay="TOP" layoutX="188.0" layoutY="256.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Search Cadet" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Rockwell Condensed" size="54.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#26ff96" />
+                  <Stop color="#26ff96" offset="0.007662835249042145" />
+                  <Stop color="#217eb0" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="buttonAddCadet" alignment="CENTER" contentDisplay="TOP" layoutX="737.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchToAddCadet" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Add New Cadet" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Rockwell Condensed" size="54.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#26ff96" />
+                  <Stop color="#26ff96" offset="0.007662835249042145" />
+                  <Stop color="#217eb0" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="buttonWingAttendance" alignment="CENTER" contentDisplay="TOP" layoutX="737.0" layoutY="214.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Attendance" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Rockwell Condensed" size="54.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#26ff96" />
+                  <Stop color="#26ff96" offset="0.007662835249042145" />
+                  <Stop color="#217eb0" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="45.0" prefHeight="78.0" prefWidth="1280.0" text="ROTC Tracker" textAlignment="CENTER" underline="true">
+         <font>
+            <Font name="Rockwell Condensed Bold" size="65.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#26ff96" />
+                  <Stop color="#217eb0" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button fx:id="buttonRemoveCadet" alignment="CENTER" contentDisplay="TOP" layoutX="737.0" layoutY="430.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Remove Cadet" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Rockwell Condensed" size="54.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#26ff96" />
+                  <Stop color="#26ff96" offset="0.007662835249042145" />
+                  <Stop color="#217eb0" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="buttonWingObjectives" alignment="CENTER" contentDisplay="TOP" layoutX="188.0" layoutY="377.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Objectives" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Rockwell Condensed" size="54.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#26ff96" />
+                  <Stop color="#26ff96" offset="0.007662835249042145" />
+                  <Stop color="#217eb0" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+   </children>
+</AnchorPane>
