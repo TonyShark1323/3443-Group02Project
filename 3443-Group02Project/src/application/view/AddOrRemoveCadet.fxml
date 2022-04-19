@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AddOrRemoveCadetController">
    <children>
-      <Button fx:id="buttonAdd" alignment="CENTER" contentDisplay="CENTER" layoutX="536.0" layoutY="594.0" mnemonicParsing="false" onAction="#add" style="-fx-background-radius: 30; -fx-background-color: black;" text="Add Cadet" textAlignment="CENTER">
+      <Button fx:id="buttonAdd" alignment="CENTER" contentDisplay="CENTER" layoutX="536.0" layoutY="639.0" mnemonicParsing="false" onAction="#add" style="-fx-background-radius: 30; -fx-background-color: black;" text="Add Cadet" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -27,7 +27,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="buttonRemove" alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="594.0" mnemonicParsing="false" style="-fx-background-radius: 30; -fx-background-color: black;" text="Delete Cadet" textAlignment="CENTER" visible="false">
+      <Button fx:id="buttonRemove" alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="594.0" mnemonicParsing="false" onAction="#remove" style="-fx-background-radius: 30; -fx-background-color: black;" text="Delete Cadet" textAlignment="CENTER" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -67,27 +67,32 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="textFieldCadetName" alignment="CENTER" layoutX="497.0" layoutY="190.0" prefHeight="52.0" prefWidth="285.0" promptText="Cadet Name" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
+      <TextField fx:id="textFieldCadetFirstName" alignment="CENTER" layoutX="497.0" layoutY="157.0" prefHeight="52.0" prefWidth="285.0" promptText="Cadet First Name" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="textFieldCompletedObjectives" alignment="CENTER" layoutX="497.0" layoutY="260.0" prefHeight="52.0" prefWidth="285.0" promptText="Completed Objectives" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
+      <TextField fx:id="textFieldCadetLastName" alignment="CENTER" layoutX="497.0" layoutY="227.0" prefHeight="52.0" prefWidth="285.0" promptText="Cadet Last Name" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="textFieldClassification" alignment="CENTER" layoutX="497.0" layoutY="330.0" prefHeight="52.0" prefWidth="285.0" promptText="Classification" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
+      <TextField fx:id="textFieldCompletedObjectives" alignment="CENTER" layoutX="497.0" layoutY="297.0" prefHeight="52.0" prefWidth="285.0" promptText="Completed Objectives" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="textFieldAS" alignment="CENTER" layoutX="497.0" layoutY="400.0" prefHeight="52.0" prefWidth="285.0" promptText="AS #" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
+      <TextField fx:id="textFieldClassification" alignment="CENTER" layoutX="497.0" layoutY="367.0" prefHeight="52.0" prefWidth="285.0" promptText="Classification" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="textFieldFlightDesignation" alignment="CENTER" layoutX="497.0" layoutY="470.0" prefHeight="52.0" prefWidth="285.0" promptText="Flight Designation" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
+      <TextField fx:id="textFieldAS" alignment="CENTER" layoutX="497.0" layoutY="437.0" prefHeight="52.0" prefWidth="285.0" promptText="AS #" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="textFieldFlightDesignation" alignment="CENTER" layoutX="497.0" layoutY="507.0" prefHeight="52.0" prefWidth="285.0" promptText="Flight Designation" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: #333333; -fx-border-radius: 30; -fx-text-fill: white;">
          <font>
             <Font size="20.0" />
          </font>
@@ -121,7 +126,7 @@
             </LinearGradient>
          </textFill>
       </RadioButton>
-      <ListView fx:id="listViewCadets" layoutX="450.0" layoutY="181.0" prefHeight="376.0" prefWidth="376.0" />
+      <ListView fx:id="listViewCadets" layoutX="437.0" layoutY="160.0" prefHeight="416.0" prefWidth="416.0" />
       <Label alignment="CENTER" layoutY="45.0" prefHeight="78.0" prefWidth="1280.0" text="Add Or Remove Cadet" textAlignment="CENTER" underline="true">
          <font>
             <Font name="Rockwell Condensed Bold" size="65.0" />
@@ -135,7 +140,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Label fx:id="labelMessage" alignment="TOP_CENTER" layoutX="483.0" layoutY="522.0" prefHeight="74.0" prefWidth="331.0" textFill="WHITE" wrapText="true">
+      <Label fx:id="labelMessage" alignment="TOP_CENTER" layoutX="483.0" layoutY="567.0" prefHeight="74.0" prefWidth="331.0" textFill="WHITE" wrapText="true">
          <font>
             <Font size="25.0" />
          </font>

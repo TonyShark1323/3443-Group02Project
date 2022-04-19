@@ -1,2 +1,1 @@
-John, Gay, Man, 7, Alpha
-Stacy, Sex, Female, 2, Bets
+John, Manning, None, Male, 4, Alpha

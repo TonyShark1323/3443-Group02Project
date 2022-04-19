@@ -28,7 +28,7 @@ public class AddOrRemoveCadetController implements Initializable {
     @FXML private ListView<Cadet> listViewCadets;
     @FXML private Button buttonAdd, buttonRemove;
     @FXML private RadioButton rButtonAdd, rButtonRemove;
-    @FXML private TextField textFieldCadetName, textFieldCompletedObjectives, textFieldClassification, textFieldAS, textFieldFlightDesignation;
+    @FXML private TextField textFieldCadetFirstName, textFieldCadetLastName, textFieldCompletedObjectives, textFieldClassification, textFieldAS, textFieldFlightDesignation;
     @FXML private Label labelMessage;
     
     private Stage stage;
@@ -42,26 +42,27 @@ public class AddOrRemoveCadetController implements Initializable {
         cadetCount = 0;
         populateList();
         
-        textFieldCadetName.clear();
+        textFieldCadetFirstName.clear();
+        textFieldCadetLastName.clear();
+        textFieldCompletedObjectives.clear();
         textFieldClassification.clear();
         textFieldAS.clear();
-        textFieldAS.clear();
+        textFieldFlightDesignation.clear();
+        labelMessage.setText("");
         
         listViewCadets.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Cadet>() {
 
             @Override
             public void changed(ObservableValue<? extends Cadet> arg0, Cadet arg1, Cadet arg2) {
                 currentCadet = listViewCadets.getSelectionModel().getSelectedItem();
-                currentCadetName = listViewCadets.getSelectionModel().getSelectedItem().getCadetName();
-                
+                //currentCadetName = listViewCadets.getSelectionModel().getSelectedItem().getCadetFullName();
             }   
-        });
-        
+        });  
     }
     
     void populateList() {
         listViewCadets.getItems().clear();
-        AddOrRemoveCadetModel.readcadetsFile();
+        AddOrRemoveCadetModel.readCadetsFile();
         int i;
         //System.out.println("List before populate " + NeedGiveModel.inventoryItems + "\n");
         for (i = 0; i < AddOrRemoveCadetModel.cadets.size(); i++) {
@@ -76,11 +77,22 @@ public class AddOrRemoveCadetController implements Initializable {
      */
     public void getAction() {
         if(rButtonAdd.isSelected()) {
+            labelMessage.setText("");
             setAdd();
         }
         else if (rButtonRemove.isSelected()) {
+            labelMessage.setText("");
             setRemove();
         }
+    }
+    
+    public void remove() throws IOException {
+         if (currentCadet != null) {
+             int index = AddOrRemoveCadetModel.cadets.indexOf(currentCadet);
+             String message = AddOrRemoveCadetModel.deleteCadet(index);
+             
+             populateList();
+         }
     }
     
     /**
@@ -91,32 +103,32 @@ public class AddOrRemoveCadetController implements Initializable {
      * @throws IOException
      */
     public void add() throws IOException {
-        String inputCadetName = textFieldCadetName.getText();
+        String inputCadetFirstName = textFieldCadetFirstName.getText();
+        String inputCadetLastName = textFieldCadetLastName.getText();
         String inputCompletedObjectives = textFieldCompletedObjectives.getText();
         String inputClassification = textFieldClassification.getText();
         String inputASNum = textFieldAS.getText();
         String inputFlightDesignation = textFieldFlightDesignation.getText();
         
-        if (textFieldCadetName.getText().isEmpty() || textFieldCompletedObjectives.getText().isEmpty() || textFieldClassification.getText().isEmpty() || textFieldAS.getText().isEmpty() || textFieldFlightDesignation.getText().isEmpty()) {
+        if (textFieldCadetFirstName.getText().isEmpty() || textFieldCadetLastName.getText().isEmpty() || textFieldCompletedObjectives.getText().isEmpty() || textFieldClassification.getText().isEmpty() || textFieldAS.getText().isEmpty() || textFieldFlightDesignation.getText().isEmpty()) {
             
                 labelMessage.setText("Must Fill All Fields");
         }
         else {
-                String message = AddOrRemoveCadetModel.addCadet(inputCadetName, inputCompletedObjectives, inputClassification, inputASNum, inputFlightDesignation);
+                String message = AddOrRemoveCadetModel.addCadet(inputCadetFirstName, inputCadetLastName, inputCompletedObjectives, inputClassification, inputASNum, inputFlightDesignation);
                 System.out.println("Message returned: " + message);
                 //System.out.println("Item Count: " + NeedGiveController.itemCount);
                 labelMessage.setText(message);
-
                 
             System.out.println("\nCadets" + AddOrRemoveCadetModel.cadets + "\n");
-            textFieldCadetName.clear();
+            textFieldCadetFirstName.clear();
+            textFieldCadetLastName.clear();
             textFieldCompletedObjectives.clear();
             textFieldClassification.clear();
             textFieldAS.clear();
             textFieldFlightDesignation.clear();
             populateList();
         }
-
     }
     
     
@@ -124,7 +136,14 @@ public class AddOrRemoveCadetController implements Initializable {
         buttonAdd.setVisible(true);
         buttonRemove.setVisible(false);
         rButtonAdd.setSelected(true);
+        labelMessage.setVisible(true);
         listViewCadets.setVisible(false);
+        textFieldCadetFirstName.setVisible(true);
+        textFieldCadetLastName.setVisible(true);
+        textFieldCompletedObjectives.setVisible(true);
+        textFieldClassification.setVisible(true);
+        textFieldAS.setVisible(true);
+        textFieldFlightDesignation.setVisible(true);
     }
     
     /**
@@ -134,7 +153,14 @@ public class AddOrRemoveCadetController implements Initializable {
         buttonRemove.setVisible(true);
         buttonAdd.setVisible(false);
         rButtonRemove.setSelected(true);
+        labelMessage.setVisible(true);
         listViewCadets.setVisible(true);
+        textFieldCadetFirstName.setVisible(false);
+        textFieldCadetLastName.setVisible(false);
+        textFieldCompletedObjectives.setVisible(false);
+        textFieldClassification.setVisible(false);
+        textFieldAS.setVisible(false);
+        textFieldFlightDesignation.setVisible(false);
     }
     
     /**

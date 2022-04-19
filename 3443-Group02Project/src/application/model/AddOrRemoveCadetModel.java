@@ -52,7 +52,7 @@ public class AddOrRemoveCadetModel {
      * @param itemFileReader A buffered reader used to read the item input file
      * @param line A string used to read the file line by line
      */
-    public static void readcadetsFile() {
+    public static void readCadetsFile() {
         createCadetsFile();
         cadets.clear();
         ////System.out.println("Read items called");
@@ -63,13 +63,14 @@ public class AddOrRemoveCadetModel {
             itemFileReader = new BufferedReader(new FileReader(cadetsFile));
             while((line = itemFileReader.readLine()) != null) {
                 String[] row = line.split(",\\s");
-                String cadetName = row[0];
-                String objectives = row[1];
-                String classification = row[2];
-                String asNum = row[3];
-                String flightDesignation = row[4];
+                String cadetFirstName = row[0];
+                String cadetLastName = row[1];
+                String objectives = row[2];
+                String classification = row[3];
+                String asNum = row[4];
+                String flightDesignation = row[5];
                 ////System.out.println("\t");
-                cadets.add(new Cadet(cadetName, objectives, classification, asNum, flightDesignation));
+                cadets.add(new Cadet(cadetFirstName, cadetLastName, objectives, classification, asNum, flightDesignation));
             }
             System.out.println(cadets);
         }
@@ -88,46 +89,69 @@ public class AddOrRemoveCadetModel {
     
     /**
      * Handles adding an item to the inventory
+     * @param inputFlightDesignation 
      * 
      * @param message String used to hold the message that will be returned and is used to set label text
      * @param containsItem used to determine if the list contains the specified item or not
      * @param itemFileWriter file writer used to write to the items file
      * @return message returns the designated message 
      */
-    public static String addCadet(String inputCadetName, String objectives, String classification, String asNum, String flightDesignation) throws IOException {
+    public static String addCadet(String inputCadetFirstName, String inputCadetLastName, String objectives, String classification, String asNum, String flightDesignation) throws IOException {
         String message = "";
         boolean cadetExists = false;
         FileWriter cadetFileWriter = new FileWriter(cadetsFile, true);
         if (AddOrRemoveCadetController.cadetCount > 0) {
             for (Cadet cadet : AddOrRemoveCadetModel.cadets) {
-                if (cadet.getCadetName().equals(inputCadetName)) {       
+                if (cadet.getCadetFullName().equals(inputCadetLastName + ", " + inputCadetFirstName)) {       
                     cadetExists = true;
                     //System.out.println(hasItem);
                 }
             }
             if (cadetExists != true) {
                 //System.out.println("Item does not exist, adding to list");
-                cadets.add(new Cadet(inputCadetName, objectives, classification, asNum, flightDesignation));
+                cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objectives, classification, asNum, flightDesignation));
                 message = "Successful!";
                 AddOrRemoveCadetController.cadetCount++;
                 
-                cadetFileWriter.write(inputCadetName + ", " + objectives + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n" );
+                cadetFileWriter.write(inputCadetFirstName + ", " +  inputCadetLastName + ", " + objectives + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n" );
                 cadetFileWriter.close();
 
             }
             if (cadetExists) {
-                message = "Cadet \"" + inputCadetName + "\" already exists!";
+                message = "Cadet \"" + inputCadetLastName + ", " + inputCadetFirstName + "\" already exists!";
             }
         } else if (AddOrRemoveCadetController.cadetCount == 0) {
-            cadets.add(new Cadet(inputCadetName, objectives, classification, asNum, flightDesignation));
+            cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objectives, classification, asNum, flightDesignation));
             //System.out.println("Item does not exist, adding to list");
             message = "Successful!";
             AddOrRemoveCadetController.cadetCount++;
-            cadetFileWriter.write(inputCadetName + ", " + objectives + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n" );
+            cadetFileWriter.write(inputCadetFirstName + ", " + inputCadetLastName +  ", " + objectives + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n" );
             cadetFileWriter.close();
 
         }
         //for (i = 0; i < needGiveModel.getItemList().size(); i++) {System.out.println(needGiveModel.getItemList().get(i).getItemName() + " " + needGiveModel.getItemList().get(i).getQty());}
+        return message;
+    }
+    
+    public static String deleteCadet(int cadetIndex) throws IOException {
+        cadets.remove(cadetIndex);
+        String message = "";
+        FileWriter empty = new FileWriter(cadetsFile);
+        empty.write("");
+        empty.close();
+        for (Cadet arr : cadets) {
+            FileWriter myWriter = new FileWriter(cadetsFile, true);
+            int index = cadets.indexOf(arr);
+            String firstName = cadets.get(index).getCadetFirstName();
+            String lastName = cadets.get(index).getCadetLastName();
+            String objectives = cadets.get(index).getObjectives();
+            String classification = cadets.get(index).getClassification();
+            String asNum = cadets.get(index).getASNum();
+            String flightDesignation = cadets.get(index).getFlightDesignation();
+                myWriter.write(firstName + ", " + lastName + ", " + objectives + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
+                myWriter.close();
+        }
+        message = "Cadet Successfully Deleted";
         return message;
     }
 }

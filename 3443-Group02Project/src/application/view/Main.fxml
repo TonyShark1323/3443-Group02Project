@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
    <children>
-      <Button fx:id="buttonSearchCadet" alignment="CENTER" contentDisplay="TOP" layoutX="188.0" layoutY="256.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Search Cadet" textAlignment="CENTER">
+      <Button fx:id="buttonSearchCadet" alignment="CENTER" contentDisplay="TOP" layoutX="737.0" layoutY="214.0" mnemonicParsing="false" onAction="#switchToSearchCadet" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Search Cadet" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -45,7 +45,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="buttonWingAttendance" alignment="CENTER" contentDisplay="TOP" layoutX="737.0" layoutY="214.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Attendance" textAlignment="CENTER">
+      <Button fx:id="buttonWingAttendance" alignment="CENTER" contentDisplay="TOP" layoutX="188.0" layoutY="267.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Attendance" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -75,7 +75,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="buttonRemoveCadet" alignment="CENTER" contentDisplay="TOP" layoutX="737.0" layoutY="430.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Remove Cadet" textAlignment="CENTER">
+      <Button fx:id="buttonRemoveCadet" alignment="CENTER" contentDisplay="TOP" layoutX="737.0" layoutY="430.0" mnemonicParsing="false" onAction="#switchToRemoveCadet" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Remove Cadet" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
