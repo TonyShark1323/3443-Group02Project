@@ -105,7 +105,7 @@ public class Cadet {
      */
     @Override
     public String toString() {
-        return this.cadetFirstName + ", " + this.cadetLastName + ", " + this.objectives + ", " + this.classification + ", " + this.asNum + ", " + this.flightDesignation;
-        //return this.getCadetFullName();
+        //return this.cadetFirstName + ", " + this.cadetLastName + ", " + this.objectives + ", " + this.classification + ", " + this.asNum + ", " + this.flightDesignation;
+        return this.getCadetFullName();
     }
 }

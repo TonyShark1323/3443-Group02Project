@@ -126,7 +126,7 @@
             </LinearGradient>
          </textFill>
       </RadioButton>
-      <ListView fx:id="listViewCadets" layoutX="437.0" layoutY="160.0" prefHeight="416.0" prefWidth="416.0" />
+      <ListView fx:id="listViewCadets" layoutX="437.0" layoutY="160.0" prefHeight="416.0" prefWidth="416.0" visible="false" />
       <Label alignment="CENTER" layoutY="45.0" prefHeight="78.0" prefWidth="1280.0" text="Add Or Remove Cadet" textAlignment="CENTER" underline="true">
          <font>
             <Font name="Rockwell Condensed Bold" size="65.0" />
