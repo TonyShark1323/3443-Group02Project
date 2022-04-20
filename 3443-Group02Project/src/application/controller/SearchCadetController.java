@@ -129,10 +129,10 @@ public class SearchCadetController implements Initializable{
             public void changed(ObservableValue<? extends Cadet> arg0, Cadet arg1, Cadet arg2) {
                 try {
                     currentCadet = listViewCadets.getSelectionModel().getSelectedItem();
-                    labelInfoDisplay.setText("Cadet Name: " + currentCadet.getCadetFullName() + "\n" 
-                    + "Completed Objectives: " + currentCadet.getObjectives() + "\n"
-                    + "Classification: " + currentCadet.getClassification() + "\n"
-                    + "AS #: " + currentCadet.getASNum() + "\n"
+                    labelInfoDisplay.setText("Cadet Name: " + currentCadet.getCadetFullName() + "\n\n" 
+                    + "Completed Objectives: \n" + currentCadet.getObjectivesString() + "\n"
+                    + "Classification: " + currentCadet.getClassification() + "\n\n"
+                    + "AS #: " + currentCadet.getASNum() + "\n\n"
                     + "Flight Designation: " + currentCadet.getFlightDesignation() + "\n");
                 } 
                 catch (NullPointerException e) {

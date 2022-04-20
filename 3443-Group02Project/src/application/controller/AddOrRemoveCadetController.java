@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -28,8 +29,9 @@ public class AddOrRemoveCadetController implements Initializable {
     @FXML private ListView<Cadet> listViewCadets;
     @FXML private Button buttonAdd, buttonRemove;
     @FXML private RadioButton rButtonAdd, rButtonRemove;
-    @FXML private TextField textFieldCadetFirstName, textFieldCadetLastName, textFieldCompletedObjectives, textFieldClassification, textFieldAS, textFieldFlightDesignation;
-    @FXML private Label labelMessage;
+    @FXML private TextField textFieldCadetFirstName, textFieldCadetLastName, textFieldClassification, textFieldAS, textFieldFlightDesignation;
+    @FXML private CheckBox cbSOB1_1, cbSOB1_2, cbSOB1_3, cbSOB1_4;
+    @FXML private Label labelMessage, labelCompletedObjectives, labelCheckBox;
     
     private Stage stage;
     private Scene scene;
@@ -44,7 +46,6 @@ public class AddOrRemoveCadetController implements Initializable {
         
         textFieldCadetFirstName.clear();
         textFieldCadetLastName.clear();
-        textFieldCompletedObjectives.clear();
         textFieldClassification.clear();
         textFieldAS.clear();
         textFieldFlightDesignation.clear();
@@ -89,7 +90,7 @@ public class AddOrRemoveCadetController implements Initializable {
     public void remove() throws IOException {
          if (currentCadet != null) {
              int index = AddOrRemoveCadetModel.cadets.indexOf(currentCadet);
-             String message = AddOrRemoveCadetModel.deleteCadet(index);
+             AddOrRemoveCadetModel.deleteCadet(index);
              
              populateList();
          }
@@ -105,12 +106,12 @@ public class AddOrRemoveCadetController implements Initializable {
     public void add() throws IOException {
         String inputCadetFirstName = textFieldCadetFirstName.getText();
         String inputCadetLastName = textFieldCadetLastName.getText();
-        String inputCompletedObjectives = textFieldCompletedObjectives.getText();
+        String[] inputCompletedObjectives = getObjectives();
         String inputClassification = textFieldClassification.getText();
         String inputASNum = textFieldAS.getText();
         String inputFlightDesignation = textFieldFlightDesignation.getText();
         
-        if (textFieldCadetFirstName.getText().isEmpty() || textFieldCadetLastName.getText().isEmpty() || textFieldCompletedObjectives.getText().isEmpty() || textFieldClassification.getText().isEmpty() || textFieldAS.getText().isEmpty() || textFieldFlightDesignation.getText().isEmpty()) {
+        if (textFieldCadetFirstName.getText().isEmpty() || textFieldCadetLastName.getText().isEmpty() || textFieldClassification.getText().isEmpty() || textFieldAS.getText().isEmpty() || textFieldFlightDesignation.getText().isEmpty()) {
             
                 labelMessage.setText("Must Fill All Fields");
         }
@@ -123,12 +124,61 @@ public class AddOrRemoveCadetController implements Initializable {
             System.out.println("\nCadets" + AddOrRemoveCadetModel.cadets + "\n");
             textFieldCadetFirstName.clear();
             textFieldCadetLastName.clear();
-            textFieldCompletedObjectives.clear();
+            cbSOB1_1.setSelected(false);
+            cbSOB1_2.setSelected(false);
+            cbSOB1_3.setSelected(false);
+            cbSOB1_4.setSelected(false);
             textFieldClassification.clear();
             textFieldAS.clear();
             textFieldFlightDesignation.clear();
             populateList();
         }
+    }
+    
+    public String[] getObjectives() {
+        String[] obj = new String[4];
+        String compObj1 = "";
+        String compObj2 = "";
+        String compObj3 = "";
+        String compObj4 = "";
+
+        if (cbSOB1_1.isSelected()) {
+            //compObj1 = "Completed-";
+            obj[0] = "Completed-";
+        }
+        else {
+            //compObj1 = "Not Completed-";
+            obj[0] = "Not Completed-";
+        }
+        
+        if (cbSOB1_2.isSelected()) {
+            //compObj2 = "Completed-";
+            obj[1] = "Completed-";
+        }
+        else {
+            //compObj2 = "Not Completed-";
+            obj[1] = "Not Completed-";
+        }
+        
+        if (cbSOB1_3.isSelected()) {
+            //compObj3 = "Completed-";
+            obj[2] = "Completed-";
+        }
+        else {
+            //compObj3 = "Not Completed-";
+            obj[2] = "Not Completed-";
+        }
+        
+        if (cbSOB1_4.isSelected()) {
+            //compObj4 = "Completed-";
+            obj[3] = "Completed";
+        }
+        else {
+            //compObj4 = "Not Completed";
+            obj[3] = "Not Completed";
+        }
+        System.out.println(obj[0] + obj[1] + obj[2] + obj[3]);
+        return obj;
     }
     
     
@@ -140,7 +190,12 @@ public class AddOrRemoveCadetController implements Initializable {
         listViewCadets.setVisible(false);
         textFieldCadetFirstName.setVisible(true);
         textFieldCadetLastName.setVisible(true);
-        textFieldCompletedObjectives.setVisible(true);
+        labelCompletedObjectives.setVisible(true);
+        labelCheckBox.setVisible(true);
+        cbSOB1_1.setVisible(true);
+        cbSOB1_2.setVisible(true);
+        cbSOB1_3.setVisible(true);
+        cbSOB1_4.setVisible(true);
         textFieldClassification.setVisible(true);
         textFieldAS.setVisible(true);
         textFieldFlightDesignation.setVisible(true);
@@ -157,7 +212,12 @@ public class AddOrRemoveCadetController implements Initializable {
         listViewCadets.setVisible(true);
         textFieldCadetFirstName.setVisible(false);
         textFieldCadetLastName.setVisible(false);
-        textFieldCompletedObjectives.setVisible(false);
+        labelCompletedObjectives.setVisible(false);
+        labelCheckBox.setVisible(false);
+        cbSOB1_1.setVisible(false);
+        cbSOB1_2.setVisible(false);
+        cbSOB1_3.setVisible(false);
+        cbSOB1_4.setVisible(false);
         textFieldClassification.setVisible(false);
         textFieldAS.setVisible(false);
         textFieldFlightDesignation.setVisible(false);

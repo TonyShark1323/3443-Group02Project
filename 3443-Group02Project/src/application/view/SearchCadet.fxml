@@ -67,9 +67,9 @@
          </font>
       </TextField>
       <ListView fx:id="listViewCadets" layoutX="837.0" layoutY="130.0" prefHeight="413.0" prefWidth="413.0" />
-      <Label fx:id="labelInfoDisplay" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="224.0" prefHeight="374.0" prefWidth="536.0" wrapText="true">
+      <Label fx:id="labelInfoDisplay" alignment="TOP_LEFT" layoutX="292.0" layoutY="224.0" prefHeight="491.0" prefWidth="536.0" wrapText="true">
          <font>
-            <Font size="20.0" />
+            <Font size="23.0" />
          </font>
          <textFill>
             <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0" startX="1.0">

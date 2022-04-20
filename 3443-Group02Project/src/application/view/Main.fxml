@@ -45,7 +45,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="buttonWingAttendance" alignment="CENTER" contentDisplay="TOP" layoutX="188.0" layoutY="267.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Attendance" textAlignment="CENTER">
+      <Button fx:id="buttonWingAttendance" alignment="CENTER" contentDisplay="TOP" layoutX="188.0" layoutY="267.0" mnemonicParsing="false" onAction="#switchToWingAttendance" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Attendance" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -92,7 +92,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="buttonWingObjectives" alignment="CENTER" contentDisplay="TOP" layoutX="188.0" layoutY="377.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Objectives" textAlignment="CENTER">
+      <Button fx:id="buttonWingObjectives" alignment="CENTER" contentDisplay="TOP" layoutX="188.0" layoutY="377.0" mnemonicParsing="false" onAction="#switchToWingObjectives" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Objectives" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

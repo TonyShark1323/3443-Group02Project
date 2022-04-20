@@ -1,6 +1,3 @@
-John, Manning, None, Male, 4, Alpha
-John, Long, None, Male, 5, Beta
-Stacy, Long, None, Female, 7, Alpha
-Logan, Hall, None, Male, 9, Charlie
-Tony, Martinez, None, Male, 12, Charlie
-Ashley, Mann, None, Female, 69, Beta
+John, Long, Completed-Not Completed-Completed-Not Completed, Male, AS100, Alpha
+Stacy, Blevins, Completed-Completed-Completed-Completed, Female, AS200, Beta
+Tony, Martinez, Not Completed-Not Completed-Not Completed-Not Completed, Male, AS300, Charlie
