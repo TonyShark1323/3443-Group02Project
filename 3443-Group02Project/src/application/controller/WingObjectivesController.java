@@ -25,7 +25,8 @@ import javafx.stage.Stage;
 
 public class WingObjectivesController implements Initializable{
     @FXML private TableView<Cadet> tableView;
-    @FXML private TableColumn<Cadet, String> fullNameColumn;
+    @FXML private TableColumn<Cadet, String> lastNameColumn;
+    @FXML private TableColumn<Cadet, String> firstNameColumn;
     @FXML private TableColumn<Cadet, String> asNumColumn;
     @FXML private TableColumn<Cadet, String> flightDesignationColumn;
     @FXML private TableColumn<Cadet, String> objective1Column;
@@ -39,11 +40,14 @@ public class WingObjectivesController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         AddOrRemoveCadetModel.readCadetsFile();
-        String obj1 = AddOrRemoveCadetModel.cadets.get(0).getObjectivesString();
-        fullNameColumn.setCellValueFactory(new PropertyValueFactory<Cadet, String>("cadetFirstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Cadet, String>("cadetLastName"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Cadet, String>("cadetFirstName"));
         asNumColumn.setCellValueFactory(new PropertyValueFactory<Cadet, String>("ASNum"));
         flightDesignationColumn.setCellValueFactory(new PropertyValueFactory<Cadet, String>("flightDesignation"));
-        objective1Column.setCellValueFactory(new PropertyValueFactory<Cadet, String>(obj1));
+        objective1Column.setCellValueFactory(new PropertyValueFactory<Cadet, String>("objective1"));
+        objective2Column.setCellValueFactory(new PropertyValueFactory<Cadet, String>("objective2"));
+        objective3Column.setCellValueFactory(new PropertyValueFactory<Cadet, String>("objective3"));
+        objective4Column.setCellValueFactory(new PropertyValueFactory<Cadet, String>("objective4"));
         
         tableView.setItems(getCadets());
     }

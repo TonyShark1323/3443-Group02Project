@@ -22,14 +22,16 @@ public class Cadet {
     /**
      * Constructor
      */
-    public Cadet(String cadetFirstName, String cadetLastName, String[] objectives, String classification, String asNum, String flightDesignation) {
+    public Cadet(String cadetFirstName, String cadetLastName, String objective1, String objective2, String objective3, String objective4,  String classification, String asNum, String flightDesignation) {
         this.cadetFirstName = cadetFirstName;
         this.cadetLastName = cadetLastName;
-        this.objectives = objectives;
+        this.objective1 = objective1;
+        this.objective2 = objective2;
+        this.objective3 = objective3;
+        this.objective4 = objective4;
         this.classification = classification;
         this.asNum = asNum;
         this.flightDesignation = flightDesignation;
-        objective1 = objectives[0];
     }
     
     /**
@@ -62,48 +64,90 @@ public class Cadet {
     }
     
     /**
-     * Objectives Setter and Getter
+     * Objectives Setter and Getters
      */
-    public void setObjectives(String[] objectives){
-        this.objectives = objectives;
+    public void setObjective1(String objective1){
+        this.objective1 = objective1;
     }
     
-    public String[] getObjectivesArray() {
-        return this.objectives;
+    public String getObjective1(){
+        return this.objective1;
     }
     
-    public String getObjectivesString(){
+    public String getObjective1Name(){
         String compObj1 = "";
-        String compObj2 = "";
-        String compObj3 = "";
-        String compObj4 = "";
-
-        if (this.objectives[0].equals("Completed")) {
+        if (this.objective1.equals("Completed")) {
             //System.out.println("yes");
             compObj1 = "SOB1.1\n";
         }
-        
-        if (this.objectives[1].equals("Completed")) {
+        return compObj1;
+    }
+
+    public void setObjective2(String objective2){
+        this.objective2 = objective2;
+    }
+    
+    public String getObjective2(){
+        return this.objective2;
+    }
+    
+    public String getObjective2Name(){
+        String compObj2 = "";
+        if (this.objective2.equals("Completed")) {
             //System.out.println("yes");
             compObj2 = "SOB1.2\n";
         }
-        
-        if (this.objectives[2].equals("Completed")) {
+        return compObj2;
+    }
+    
+    public void setObjective3(String objective3){
+        this.objective3 = objective3;
+    }
+    
+    public String getObjective3(){
+        return this.objective3;
+    }
+    
+    public String getObjective3Name(){
+        String compObj3 = "";
+        if (this.objective3.equals("Completed")) {
             //System.out.println("yes");
             compObj3 = "SOB1.3\n";
         }
-        
-        if (this.objectives[3].equals("Completed")) {
+        return compObj3;
+    }
+    
+    public void setObjective4(String objective4){
+        this.objective4 = objective4;
+    }
+    
+    public String getObjective4(){
+        return this.objective4;
+    }
+    
+    public String getObjective4Name(){
+        String compObj4 = "";
+        if (this.objective4.equals("Completed")) {
             //System.out.println("yes");
             compObj4 = "SOB1.4\n";
         }
+        return compObj4;
+    }
+    
+    public String getObjectives() {
+        String message;
+        String obj1 = getObjective1Name();
+        String obj2 = getObjective2Name();
+        String obj3 = getObjective3Name();
+        String obj4 = getObjective4Name();
         
-        if (compObj1.isEmpty() && compObj2.isEmpty() && compObj3.isEmpty() && compObj4.isEmpty()) {
-            return "No Objectives Completed\n";
+        if (obj1.isEmpty() && obj2.isEmpty() && obj3.isEmpty() && obj4.isEmpty()) {
+            message = "No Completed Objectives\n";
         }
         else {
-            return compObj1 + compObj2 + compObj3 + compObj4;
+            message = obj1 + obj2 + obj3 + obj4;
         }
+        return message;
         
     }
     
@@ -145,7 +189,7 @@ public class Cadet {
      */
     @Override
     public String toString() {
-        //return this.cadetFirstName + ", " + this.cadetLastName + ", " + this.objectives + ", " + this.classification + ", " + this.asNum + ", " + this.flightDesignation;
+        //return this.cadetFirstName + ", " + this.cadetLastName + ", " + this.objective1 + ", " + this.objective2 + ", " + this.objective3 + ", " + this.objective4 + ", "  + this.classification + ", " + this.asNum + ", " + this.flightDesignation;
         return this.getCadetFullName();
     }
 }

@@ -65,12 +65,19 @@ public class AddOrRemoveCadetModel {
                 String[] row = line.split(",\\s");
                 String cadetFirstName = row[0];
                 String cadetLastName = row[1];
-                String[] objectives = row[2].split("-");
-                String classification = row[3];
-                String asNum = row[4];
-                String flightDesignation = row[5];
+                String objective1 = row[2];
+                //System.out.println("Obj 1: " + row[2]);
+                String objective2 = row[3];
+                //System.out.println("Obj 2: " + row[3]);
+                String objective3 = row[4];
+                //System.out.println("Obj 3: " + row[4]);
+                String objective4 = row[5];
+                //System.out.println("Obj 4: " + row[5]);
+                String classification = row[6];
+                String asNum = row[7];
+                String flightDesignation = row[8];
                 ////System.out.println("\t");
-                cadets.add(new Cadet(cadetFirstName, cadetLastName, objectives, classification, asNum, flightDesignation));
+                cadets.add(new Cadet(cadetFirstName, cadetLastName, objective1, objective2, objective3, objective4, classification, asNum, flightDesignation));
             }
             System.out.println(cadets);
         }
@@ -96,7 +103,7 @@ public class AddOrRemoveCadetModel {
      * @param itemFileWriter file writer used to write to the items file
      * @return message returns the designated message 
      */
-    public static String addCadet(String inputCadetFirstName, String inputCadetLastName, String[] objectives, String classification, String asNum, String flightDesignation) throws IOException {
+    public static String addCadet(String inputCadetFirstName, String inputCadetLastName, String objective1, String objective2, String objective3, String objective4,String classification, String asNum, String flightDesignation) throws IOException {
         String message = "";
         boolean cadetExists = false;
         FileWriter cadetFileWriter = new FileWriter(cadetsFile, true);
@@ -109,11 +116,11 @@ public class AddOrRemoveCadetModel {
             }
             if (cadetExists != true) {
                 //System.out.println("Item does not exist, adding to list");
-                cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objectives, classification, asNum, flightDesignation));
+                cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objective1, objective2, objective3, objective4, classification, asNum, flightDesignation));
                 message = "Successful!";
                 AddOrRemoveCadetController.cadetCount++;
                 
-                cadetFileWriter.write(inputCadetFirstName + ", " +  inputCadetLastName + ", " + objectives[0] + objectives[1] + objectives[2] + objectives[3] + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
+                cadetFileWriter.write(inputCadetFirstName + ", " +  inputCadetLastName + ", " + objective1 + ", "  + objective2  + ", " + objective3  + ", " + objective4  + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
                 cadetFileWriter.close();
 
             }
@@ -121,11 +128,11 @@ public class AddOrRemoveCadetModel {
                 message = "Cadet \"" + inputCadetLastName + ", " + inputCadetFirstName + "\" already exists!";
             }
         } else if (AddOrRemoveCadetController.cadetCount == 0) {
-            cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objectives, classification, asNum, flightDesignation));
+            cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objective1, objective2, objective3, objective4, classification, asNum, flightDesignation));
             //System.out.println("Item does not exist, adding to list");
             message = "Successful!";
             AddOrRemoveCadetController.cadetCount++;
-            cadetFileWriter.write(inputCadetFirstName + ", " +  inputCadetLastName + ", " + objectives[0] + objectives[1] + objectives[2] + objectives[3] + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
+            cadetFileWriter.write(inputCadetFirstName + ", " +  inputCadetLastName + ", " + objective1 + ", "  + objective2  + ", " + objective3  + ", " + objective4  + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
             cadetFileWriter.close();
 
         }
@@ -143,11 +150,14 @@ public class AddOrRemoveCadetModel {
             int index = cadets.indexOf(arr);
             String firstName = cadets.get(index).getCadetFirstName();
             String lastName = cadets.get(index).getCadetLastName();
-            String[] objectives = cadets.get(index).getObjectivesArray();
+            String objective1 = cadets.get(index).getObjective1();
+            String objective2 = cadets.get(index).getObjective2();
+            String objective3 = cadets.get(index).getObjective3();
+            String objective4 = cadets.get(index).getObjective4();
             String classification = cadets.get(index).getClassification();
             String asNum = cadets.get(index).getASNum();
             String flightDesignation = cadets.get(index).getFlightDesignation();
-                myWriter.write(firstName + ", " +  lastName + ", " + objectives[0] + "-" + objectives[1] + "-" + objectives[2] + "-" + objectives[3] + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
+                myWriter.write(firstName + ", " +  lastName + ", " + objective1 + ", " + objective2 + ", " + objective3 + ", " + objective4 + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
                 myWriter.close();
         }
     }

@@ -88,6 +88,7 @@ public class AddOrRemoveCadetController implements Initializable {
     }
     
     public void remove() throws IOException {
+        System.out.println("Remove Clicked");
          if (currentCadet != null) {
              int index = AddOrRemoveCadetModel.cadets.indexOf(currentCadet);
              AddOrRemoveCadetModel.deleteCadet(index);
@@ -106,7 +107,10 @@ public class AddOrRemoveCadetController implements Initializable {
     public void add() throws IOException {
         String inputCadetFirstName = textFieldCadetFirstName.getText();
         String inputCadetLastName = textFieldCadetLastName.getText();
-        String[] inputCompletedObjectives = getObjectives();
+        String inputObjective1 = getObjective1();
+        String inputObjective2 = getObjective2();
+        String inputObjective3 = getObjective3();
+        String inputObjective4 = getObjective4();
         String inputClassification = textFieldClassification.getText();
         String inputASNum = textFieldAS.getText();
         String inputFlightDesignation = textFieldFlightDesignation.getText();
@@ -116,7 +120,7 @@ public class AddOrRemoveCadetController implements Initializable {
                 labelMessage.setText("Must Fill All Fields");
         }
         else {
-                String message = AddOrRemoveCadetModel.addCadet(inputCadetFirstName, inputCadetLastName, inputCompletedObjectives, inputClassification, inputASNum, inputFlightDesignation);
+                String message = AddOrRemoveCadetModel.addCadet(inputCadetFirstName, inputCadetLastName, inputObjective1, inputObjective2, inputObjective3, inputObjective4, inputClassification, inputASNum, inputFlightDesignation);
                 System.out.println("Message returned: " + message);
                 //System.out.println("Item Count: " + NeedGiveController.itemCount);
                 labelMessage.setText(message);
@@ -135,7 +139,55 @@ public class AddOrRemoveCadetController implements Initializable {
         }
     }
     
-    public String[] getObjectives() {
+    public String getObjective1() {
+        String obj1 = "";
+        if (cbSOB1_1.isSelected()) {
+            //compObj1 = "Completed-";
+            obj1 = "Completed";
+        }
+        else {
+            obj1 = "Not Completed";
+        }
+        return obj1;
+    }
+    
+    public String getObjective2() {
+        String obj2 = "";
+        if (cbSOB1_2.isSelected()) {
+            //compObj1 = "Completed-";
+            obj2 = "Completed";
+        }
+        else {
+            obj2 = "Not Completed";
+        }
+        return obj2;
+    }
+    
+    public String getObjective3() {
+        String obj3 = "";
+        if (cbSOB1_3.isSelected()) {
+            //compObj1 = "Completed-";
+            obj3 = "Completed";
+        }
+        else {
+            obj3 = "Not Completed";
+        }
+        return obj3;
+    }
+    
+    public String getObjective4() {
+        String obj4 = "";
+        if (cbSOB1_4.isSelected()) {
+            //compObj1 = "Completed-";
+            obj4 = "Completed";
+        }
+        else {
+            obj4 = "Not Completed";
+        }
+        return obj4;
+    }
+
+    public String[] getObjectivesOld() {
         String[] obj = new String[4];
         String compObj1 = "";
         String compObj2 = "";

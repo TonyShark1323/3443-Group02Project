@@ -11,40 +11,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.WingObjectivesController">
    <children>
-      <Button fx:id="buttonAddCadet" alignment="CENTER" contentDisplay="TOP" layoutX="827.0" layoutY="322.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Input New Cadet" textAlignment="CENTER">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Rockwell Condensed" size="54.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-               <stops>
-                  <Stop color="#26ff96" />
-                  <Stop color="#26ff96" offset="0.007662835249042145" />
-                  <Stop color="#217eb0" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="buttonWingAttendance" alignment="CENTER" contentDisplay="TOP" layoutX="827.0" layoutY="214.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Wing Attendance" textAlignment="CENTER">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Rockwell Condensed" size="54.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-               <stops>
-                  <Stop color="#26ff96" />
-                  <Stop color="#26ff96" offset="0.007662835249042145" />
-                  <Stop color="#217eb0" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
       <Label alignment="CENTER" layoutY="45.0" prefHeight="78.0" prefWidth="1280.0" text="Wing Objectives" textAlignment="CENTER" underline="true">
          <font>
             <Font name="Rockwell Condensed Bold" size="65.0" />
@@ -58,33 +24,20 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button fx:id="buttonRemoveCadet" alignment="CENTER" contentDisplay="TOP" layoutX="827.0" layoutY="430.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="373.0" style="-fx-background-radius: 30; -fx-background-color: black;" text="Remove Cadet" textAlignment="CENTER">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Rockwell Condensed" size="54.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-               <stops>
-                  <Stop color="#26ff96" />
-                  <Stop color="#26ff96" offset="0.007662835249042145" />
-                  <Stop color="#217eb0" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <TableView fx:id="tableView" layoutX="205.0" layoutY="142.0" prefHeight="393.0" prefWidth="607.0">
+      <TableView fx:id="tableView" layoutX="231.0" layoutY="146.0" prefHeight="530.0" prefWidth="819.0">
         <columns>
-          <TableColumn fx:id="fullNameColumn" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="asNumColumn" prefWidth="75.0" text="AS#" />
-            <TableColumn fx:id="flightDesignationColumn" prefWidth="75.0" text="Flight" />
-            <TableColumn fx:id="objective1Column" prefWidth="75.0" text="SOB1.1" />
-            <TableColumn fx:id="objective2Column" prefWidth="75.0" text="SOB1.2" />
-            <TableColumn fx:id="objective3Column" prefWidth="75.0" text="SOB1.3" />
-            <TableColumn fx:id="objective4Column" prefWidth="75.0" text="SOB1.4" />
+          <TableColumn fx:id="lastNameColumn" prefWidth="99.0" text="Last Name" />
+          <TableColumn fx:id="firstNameColumn" prefWidth="86.0" text="First Name" />
+            <TableColumn fx:id="asNumColumn" minWidth="0.0" prefWidth="104.0" text="AS#" />
+            <TableColumn fx:id="flightDesignationColumn" prefWidth="110.0" text="Flight" />
+            <TableColumn fx:id="objective1Column" prefWidth="111.0" text="SOB1.1" />
+            <TableColumn fx:id="objective2Column" prefWidth="105.0" text="SOB1.2" />
+            <TableColumn fx:id="objective3Column" minWidth="2.0" prefWidth="96.0" text="SOB1.3" />
+            <TableColumn fx:id="objective4Column" prefWidth="107.0" text="SOB1.4" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <Button fx:id="buttonHome" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="1194.0" layoutY="640.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="38.0" prefWidth="8.0" style="-fx-background-radius: 30; -fx-background-color: black; -fx-padding: 10;" text="Home" textAlignment="CENTER">
          <cursor>

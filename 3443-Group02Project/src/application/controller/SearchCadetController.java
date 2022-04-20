@@ -130,8 +130,8 @@ public class SearchCadetController implements Initializable{
                 try {
                     currentCadet = listViewCadets.getSelectionModel().getSelectedItem();
                     labelInfoDisplay.setText("Cadet Name: " + currentCadet.getCadetFullName() + "\n\n" 
-                    + "Completed Objectives: \n" + currentCadet.getObjectivesString() + "\n"
-                    + "Classification: " + currentCadet.getClassification() + "\n\n"
+                    + "Completed Objectives: \n" + currentCadet.getObjectives()
+                    + "\nClassification: " + currentCadet.getClassification() + "\n\n"
                     + "AS #: " + currentCadet.getASNum() + "\n\n"
                     + "Flight Designation: " + currentCadet.getFlightDesignation() + "\n");
                 } 

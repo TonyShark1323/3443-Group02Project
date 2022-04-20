@@ -27,10 +27,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="buttonRemove" alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="594.0" mnemonicParsing="false" onAction="#remove" style="-fx-background-radius: 30; -fx-background-color: black;" text="Delete Cadet" textAlignment="CENTER" visible="false">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
+      <Button fx:id="buttonRemove" alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="594.0" mnemonicParsing="false" onAction="#remove" style="-fx-background-radius: 30; -fx-background-color: black;" text="Delete Cadet" textAlignment="CENTER">
          <font>
             <Font size="34.0" />
          </font>
@@ -139,6 +136,9 @@
          <font>
             <Font size="25.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <CheckBox fx:id="cbSOB1_1" layoutX="305.0" layoutY="310.0" mnemonicParsing="false" text="SOB1.1">
          <textFill>
