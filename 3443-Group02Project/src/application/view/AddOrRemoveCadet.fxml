@@ -40,6 +40,9 @@
                </stops>
             </LinearGradient>
          </textFill>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="buttonHome" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="1132.0" layoutY="616.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="38.0" prefWidth="8.0" style="-fx-background-radius: 30; -fx-background-color: black; -fx-padding: 10;" text="Home" textAlignment="CENTER">
          <cursor>

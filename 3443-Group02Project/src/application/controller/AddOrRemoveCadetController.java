@@ -260,7 +260,7 @@ public class AddOrRemoveCadetController implements Initializable {
         buttonRemove.setVisible(true);
         buttonAdd.setVisible(false);
         rButtonRemove.setSelected(true);
-        labelMessage.setVisible(true);
+        labelMessage.setVisible(false);
         listViewCadets.setVisible(true);
         textFieldCadetFirstName.setVisible(false);
         textFieldCadetLastName.setVisible(false);
