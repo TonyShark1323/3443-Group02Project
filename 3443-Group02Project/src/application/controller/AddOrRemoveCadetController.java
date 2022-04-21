@@ -23,6 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class AddOrRemoveCadetController implements Initializable {
@@ -30,8 +31,11 @@ public class AddOrRemoveCadetController implements Initializable {
     @FXML private Button buttonAdd, buttonRemove;
     @FXML private RadioButton rButtonAdd, rButtonRemove;
     @FXML private TextField textFieldCadetFirstName, textFieldCadetLastName, textFieldClassification, textFieldAS, textFieldFlightDesignation;
-    @FXML private CheckBox cbSOB1_1, cbSOB1_2, cbSOB1_3, cbSOB1_4;
-    @FXML private Label labelMessage, labelCompletedObjectives, labelCheckBox;
+    @FXML private CheckBox cbSOB1_1, cbSOB1_2, cbSOB1_3, cbSOB1_4, cbPTWeek1, cbPTWeek2, cbPTWeek3, cbPTWeek4,
+                            cbMeetWeek1, cbMeetWeek2, cbMeetWeek3, cbMeetWeek4, 
+                            cbTechWeek1, cbTechWeek2, cbTechWeek3, cbTechWeek4;
+    @FXML private Label labelMessage, labelCompletedObjectives, labelCheckBox, labelAttendance, labelCheckBoxAttendance, labelWeek1, labelWeek2, labelWeek3, labelWeek4, labelClassificationTF, labelFlightDesignationTF;
+    @FXML private Rectangle rect1, rect2, rect3, rect4;
     
     private Stage stage;
     private Scene scene;
@@ -42,6 +46,7 @@ public class AddOrRemoveCadetController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cadetCount = 0;
+        
         populateList();
         
         textFieldCadetFirstName.clear();
@@ -64,6 +69,7 @@ public class AddOrRemoveCadetController implements Initializable {
     void populateList() {
         listViewCadets.getItems().clear();
         AddOrRemoveCadetModel.readCadetsFile();
+        AddOrRemoveCadetModel.readAttendanceFile();
         int i;
         //System.out.println("List before populate " + NeedGiveModel.inventoryItems + "\n");
         for (i = 0; i < AddOrRemoveCadetModel.cadets.size(); i++) {
@@ -91,7 +97,8 @@ public class AddOrRemoveCadetController implements Initializable {
         System.out.println("Remove Clicked");
          if (currentCadet != null) {
              int index = AddOrRemoveCadetModel.cadets.indexOf(currentCadet);
-             AddOrRemoveCadetModel.deleteCadet(index);
+             String asNum = AddOrRemoveCadetModel.cadets.get(index).getASNum();
+             AddOrRemoveCadetModel.deleteCadet(index, asNum);
              
              populateList();
          }
@@ -111,6 +118,18 @@ public class AddOrRemoveCadetController implements Initializable {
         String inputObjective2 = getObjective2();
         String inputObjective3 = getObjective3();
         String inputObjective4 = getObjective4();
+        String ptWeek1 = getPTWeek1();
+        String ptWeek2 = getPTWeek2();
+        String ptWeek3 = getPTWeek3();
+        String ptWeek4 = getPTWeek4();
+        String meetWeek1 = getMeetWeek1();
+        String meetWeek2 = getMeetWeek2();
+        String meetWeek3 = getMeetWeek3();
+        String meetWeek4 = getMeetWeek4();
+        String techWeek1 = getTechWeek1();
+        String techWeek2 = getTechWeek2();
+        String techWeek3 = getTechWeek3();
+        String techWeek4 = getTechWeek4();
         String inputClassification = textFieldClassification.getText();
         String inputASNum = textFieldAS.getText();
         String inputFlightDesignation = textFieldFlightDesignation.getText();
@@ -120,7 +139,13 @@ public class AddOrRemoveCadetController implements Initializable {
                 labelMessage.setText("Must Fill All Fields");
         }
         else {
-                String message = AddOrRemoveCadetModel.addCadet(inputCadetFirstName, inputCadetLastName, inputObjective1, inputObjective2, inputObjective3, inputObjective4, inputClassification, inputASNum, inputFlightDesignation);
+                String message = AddOrRemoveCadetModel.addCadet(inputCadetFirstName, inputCadetLastName, 
+                        inputObjective1, inputObjective2, inputObjective3, inputObjective4, 
+                        inputClassification, inputASNum, inputFlightDesignation,
+                        ptWeek1, ptWeek2, ptWeek3, ptWeek4,
+                        meetWeek1, meetWeek2, meetWeek3, meetWeek4,
+                        techWeek1, techWeek2, techWeek3, techWeek4);
+                
                 System.out.println("Message returned: " + message);
                 //System.out.println("Item Count: " + NeedGiveController.itemCount);
                 labelMessage.setText(message);
@@ -135,6 +160,19 @@ public class AddOrRemoveCadetController implements Initializable {
             textFieldClassification.clear();
             textFieldAS.clear();
             textFieldFlightDesignation.clear();
+            cbPTWeek1.setSelected(false);
+            cbPTWeek2.setSelected(false);
+            cbPTWeek3.setSelected(false);
+            cbPTWeek4.setSelected(false);
+            cbMeetWeek1.setSelected(false);
+            cbMeetWeek2.setSelected(false);
+            cbMeetWeek3.setSelected(false);
+            cbMeetWeek4.setSelected(false);
+            cbTechWeek1.setSelected(false);
+            cbTechWeek2.setSelected(false);
+            cbTechWeek3.setSelected(false);
+            cbTechWeek4.setSelected(false);
+            
             populateList();
         }
     }
@@ -186,54 +224,152 @@ public class AddOrRemoveCadetController implements Initializable {
         }
         return obj4;
     }
-
-    public String[] getObjectivesOld() {
-        String[] obj = new String[4];
-        String compObj1 = "";
-        String compObj2 = "";
-        String compObj3 = "";
-        String compObj4 = "";
-
-        if (cbSOB1_1.isSelected()) {
+    
+    public String getPTWeek1() {
+        String pt1 = "";
+        if (cbPTWeek1.isSelected()) {
             //compObj1 = "Completed-";
-            obj[0] = "Completed-";
+            pt1 = "Attended";
         }
         else {
-            //compObj1 = "Not Completed-";
-            obj[0] = "Not Completed-";
+            pt1 = "Not Attended";
         }
-        
-        if (cbSOB1_2.isSelected()) {
-            //compObj2 = "Completed-";
-            obj[1] = "Completed-";
-        }
-        else {
-            //compObj2 = "Not Completed-";
-            obj[1] = "Not Completed-";
-        }
-        
-        if (cbSOB1_3.isSelected()) {
-            //compObj3 = "Completed-";
-            obj[2] = "Completed-";
-        }
-        else {
-            //compObj3 = "Not Completed-";
-            obj[2] = "Not Completed-";
-        }
-        
-        if (cbSOB1_4.isSelected()) {
-            //compObj4 = "Completed-";
-            obj[3] = "Completed";
-        }
-        else {
-            //compObj4 = "Not Completed";
-            obj[3] = "Not Completed";
-        }
-        System.out.println(obj[0] + obj[1] + obj[2] + obj[3]);
-        return obj;
+        return pt1;
     }
     
+    public String getPTWeek2() {
+        String pt2 = "";
+        if (cbPTWeek2.isSelected()) {
+            //compObj1 = "Completed-";
+            pt2 = "Attended";
+        }
+        else {
+            pt2 = "Not Attended";
+        }
+        return pt2;
+    }
     
+    public String getPTWeek3() {
+        String pt3 = "";
+        if (cbPTWeek3.isSelected()) {
+            //compObj1 = "Completed-";
+            pt3 = "Attended";
+        }
+        else {
+            pt3 = "Not Attended";
+        }
+        return pt3;
+    }
+    
+    public String getPTWeek4() {
+        String pt4 = "";
+        if (cbPTWeek4.isSelected()) {
+            //compObj1 = "Completed-";
+            pt4 = "Attended";
+        }
+        else {
+            pt4 = "Not Attended";
+        }
+        return pt4;
+    }
+    
+    public String getMeetWeek1() {
+        String m1 = "";
+        if (cbMeetWeek1.isSelected()) {
+            //compObj1 = "Completed-";
+            m1 = "Attended";
+        }
+        else {
+            m1 = "Not Attended";
+        }
+        return m1;
+    }
+    
+    public String getMeetWeek2() {
+        String m2 = "";
+        if (cbMeetWeek2.isSelected()) {
+            //compObj1 = "Completed-";
+            m2 = "Attended";
+        }
+        else {
+            m2 = "Not Attended";
+        }
+        return m2;
+    }
+    
+    public String getMeetWeek3() {
+        String m3 = "";
+        if (cbMeetWeek3.isSelected()) {
+            //compObj1 = "Completed-";
+            m3 = "Attended";
+        }
+        else {
+            m3 = "Not Attended";
+        }
+        return m3;
+    }
+    
+    public String getMeetWeek4() {
+        String m4 = "";
+        if (cbMeetWeek4.isSelected()) {
+            //compObj1 = "Completed-";
+            m4 = "Attended";
+        }
+        else {
+            m4 = "Not Attended";
+        }
+        return m4;
+    }
+    
+    public String getTechWeek1() {
+        String t1 = "";
+        if (cbTechWeek1.isSelected()) {
+            //compObj1 = "Completed-";
+            t1 = "Attended";
+        }
+        else {
+            t1 = "Not Attended";
+        }
+        return t1;
+    }
+    
+    public String getTechWeek2() {
+        String t2 = "";
+        if (cbTechWeek2.isSelected()) {
+            //compObj1 = "Completed-";
+            t2 = "Attended";
+        }
+        else {
+            t2 = "Not Attended";
+        }
+        return t2;
+    }
+    
+    public String getTechWeek3() {
+        String t3 = "";
+        if (cbTechWeek3.isSelected()) {
+            //compObj1 = "Completed-";
+            t3 = "Attended";
+        }
+        else {
+            t3 = "Not Attended";
+        }
+        return t3;
+    }
+    
+    public String getTechWeek4() {
+        String t4 = "";
+        if (cbTechWeek4.isSelected()) {
+            //compObj1 = "Completed-";
+            t4 = "Attended";
+        }
+        else {
+            t4 = "Not Attended";
+        }
+        return t4;
+    }
+
+   
     public void setAdd() {
         buttonAdd.setVisible(true);
         buttonRemove.setVisible(false);
@@ -248,9 +384,33 @@ public class AddOrRemoveCadetController implements Initializable {
         cbSOB1_2.setVisible(true);
         cbSOB1_3.setVisible(true);
         cbSOB1_4.setVisible(true);
+        labelAttendance.setVisible(true);
+        labelCheckBoxAttendance.setVisible(true);
+        labelWeek1.setVisible(true);
+        labelWeek2.setVisible(true);
+        labelWeek3.setVisible(true);
+        labelWeek4.setVisible(true);
+        cbPTWeek1.setVisible(true);
+        cbPTWeek2.setVisible(true);
+        cbPTWeek3.setVisible(true);
+        cbPTWeek4.setVisible(true);
+        cbMeetWeek1.setVisible(true);
+        cbMeetWeek2.setVisible(true);
+        cbMeetWeek3.setVisible(true);
+        cbMeetWeek4.setVisible(true);
+        cbTechWeek1.setVisible(true);
+        cbTechWeek2.setVisible(true);
+        cbTechWeek3.setVisible(true);
+        cbTechWeek4.setVisible(true);
+        rect1.setVisible(true);
+        rect2.setVisible(true);
+        rect3.setVisible(true);
+        rect4.setVisible(true);
         textFieldClassification.setVisible(true);
         textFieldAS.setVisible(true);
         textFieldFlightDesignation.setVisible(true);
+        labelClassificationTF.setVisible(true);
+        labelFlightDesignationTF.setVisible(true);
     }
     
     /**
@@ -270,9 +430,33 @@ public class AddOrRemoveCadetController implements Initializable {
         cbSOB1_2.setVisible(false);
         cbSOB1_3.setVisible(false);
         cbSOB1_4.setVisible(false);
+        labelAttendance.setVisible(false);
+        labelCheckBoxAttendance.setVisible(false);
+        labelWeek1.setVisible(false);
+        labelWeek2.setVisible(false);
+        labelWeek3.setVisible(false);
+        labelWeek4.setVisible(false);
+        cbPTWeek1.setVisible(false);
+        cbPTWeek2.setVisible(false);
+        cbPTWeek3.setVisible(false);
+        cbPTWeek4.setVisible(false);
+        cbMeetWeek1.setVisible(false);
+        cbMeetWeek2.setVisible(false);
+        cbMeetWeek3.setVisible(false);
+        cbMeetWeek4.setVisible(false);
+        cbTechWeek1.setVisible(false);
+        cbTechWeek2.setVisible(false);
+        cbTechWeek3.setVisible(false);
+        cbTechWeek4.setVisible(false);
+        rect1.setVisible(false);
+        rect2.setVisible(false);
+        rect3.setVisible(false);
+        rect4.setVisible(false);
         textFieldClassification.setVisible(false);
         textFieldAS.setVisible(false);
         textFieldFlightDesignation.setVisible(false);
+        labelClassificationTF.setVisible(false);
+        labelFlightDesignationTF.setVisible(false);
     }
     
     /**

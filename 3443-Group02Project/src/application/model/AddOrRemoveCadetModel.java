@@ -17,12 +17,15 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import application.Attendance;
 import application.Cadet;
 import application.controller.AddOrRemoveCadetController;
 
 public class AddOrRemoveCadetModel {
     public static ArrayList<Cadet> cadets = new ArrayList<Cadet>();
-    public static String cadetsFile = "data/input.txt";
+    public static ArrayList<Attendance> attendanceList = new ArrayList<Attendance>();
+    public static String cadetsFile = "data/cadets.txt";
+    public static String attendanceFile = "data/attendance.txt";
     
     /**
      * Will check if there is an item file and make one if not
@@ -44,6 +47,117 @@ public class AddOrRemoveCadetModel {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
         }
+    }
+    
+    /**
+     * Will check if there is an item file and make one if not
+     * 
+     * @param file A file set to what the cadetsFile should be
+     */
+    public static void createAttendanceFile() {
+        try {
+            
+            File file = new File(attendanceFile);
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } 
+            else {
+                System.out.println("Attendance file already exists.");
+            }
+        } 
+        catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+        }
+    }
+    
+    public static void readAttendanceFile() {
+        createAttendanceFile();
+        attendanceList.clear();
+        ////System.out.println("Read items called");
+        BufferedReader attendanceFileReader = null;
+        String line = "";
+        //String file = "data/input.txt";
+        try {
+            attendanceFileReader = new BufferedReader(new FileReader(attendanceFile));
+            while((line = attendanceFileReader.readLine()) != null) {
+                String[] row = line.split(",\\s");
+                String asNum = row[0];
+                String ptWeek1 = row[1];
+                String ptWeek2 = row[2];
+                String ptWeek3 = row[3];
+                String ptWeek4 = row[4];
+                String meetWeek1 = row[5];
+                String meetWeek2 = row[6];
+                String meetWeek3 = row[7];
+                String meetWeek4 = row[8];
+                String techTrainingWeek1 = row[9];
+                String techTrainingWeek2 = row[10];
+                String techTrainingWeek3 = row[11];
+                String techTrainingWeek4 = row[12];
+                ////System.out.println("\t");
+                attendanceList.add(new Attendance(asNum, ptWeek1, ptWeek2, ptWeek3, ptWeek4, 
+                                                meetWeek1, meetWeek2, meetWeek3, meetWeek4, 
+                                                techTrainingWeek1, techTrainingWeek2, techTrainingWeek3, techTrainingWeek4));
+            }
+            //System.out.println(attendanceList);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                attendanceFileReader.close();
+            } 
+            catch (IOException e) {
+                  e.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Checks pattern of input ID
+     * 
+     * @param patternMatch the value returned, true if input ID matches required pattern
+     * @param pattern the designated pattern all input ID's must match to be added
+     * @param matcher checks if the input ID is a match to the pattern
+     * @param matchFound true if a match was found
+     * @return patternMatch returns the boolean patternMatch 
+     */
+    public static boolean ASNumChecker(String inputASNum) {
+        boolean patternMatch;
+        Pattern pattern = Pattern.compile("[A-Z]{2}[0-9]{3}");
+        Matcher matcher = pattern.matcher(inputASNum);
+        boolean matchFound = matcher.find();
+        //System.out.println("ID Length " + userID.length());
+        if(matchFound && inputASNum.length() == 5) {
+          patternMatch = true;
+        } else {
+          patternMatch = false;
+        }
+        return patternMatch;
+    }
+    
+    public static boolean classificationChecker(String classification) {
+        boolean classificationCheck;
+        if (classification.equals("IMT") || classification.equals("FTP") || classification.equals("ICL") || classification.equals("SCL")) {
+            classificationCheck = true;
+        }
+        else {
+            classificationCheck = false;
+        }
+        return classificationCheck;
+    }
+    
+    public static boolean flightDesignationChecker(String flightDesignation) {
+        boolean flightDesignationCheck;
+        if (flightDesignation.equals("Alpha") || flightDesignation.equals("Beta") || flightDesignation.equals("Gamma")) {
+            flightDesignationCheck = true;
+        }
+        else {
+            flightDesignationCheck = false;
+        }
+        return flightDesignationCheck;
     }
     
     /**
@@ -79,7 +193,7 @@ public class AddOrRemoveCadetModel {
                 ////System.out.println("\t");
                 cadets.add(new Cadet(cadetFirstName, cadetLastName, objective1, objective2, objective3, objective4, classification, asNum, flightDesignation));
             }
-            System.out.println(cadets);
+            //System.out.println(cadets);
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -103,45 +217,95 @@ public class AddOrRemoveCadetModel {
      * @param itemFileWriter file writer used to write to the items file
      * @return message returns the designated message 
      */
-    public static String addCadet(String inputCadetFirstName, String inputCadetLastName, String objective1, String objective2, String objective3, String objective4,String classification, String asNum, String flightDesignation) throws IOException {
-        String message = "";
-        boolean cadetExists = false;
-        FileWriter cadetFileWriter = new FileWriter(cadetsFile, true);
-        if (AddOrRemoveCadetController.cadetCount > 0) {
-            for (Cadet cadet : AddOrRemoveCadetModel.cadets) {
-                if (cadet.getCadetFullName().equals(inputCadetLastName + ", " + inputCadetFirstName)) {       
-                    cadetExists = true;
-                    //System.out.println(hasItem);
+    public static String addCadet(String inputCadetFirstName, String inputCadetLastName, 
+            String objective1, String objective2, String objective3, String objective4,
+            String classification, String asNum, String flightDesignation,
+            String ptWeek1, String ptWeek2, String ptWeek3, String ptWeek4,
+            String meetWeek1, String meetWeek2, String meetWeek3, String meetWeek4,
+            String techWeek1, String techWeek2, String techWeek3, String techWeek4) throws IOException {
+        String message = null;
+        boolean asNumMatch = ASNumChecker(asNum);
+        boolean classificationMatch = classificationChecker(classification);
+        boolean flightDesignationMatch = flightDesignationChecker(flightDesignation);
+        if (asNumMatch && classificationMatch && flightDesignationMatch) {
+            message = "";
+            boolean asNumExists = false;
+            FileWriter cadetFileWriter = new FileWriter(cadetsFile, true);
+            FileWriter attendanceFileWriter = new FileWriter(attendanceFile, true);
+            if (AddOrRemoveCadetController.cadetCount > 0) {
+                for (Cadet cadet : AddOrRemoveCadetModel.cadets) {
+                    if (cadet.getASNum().equals(asNum)) {
+                        asNumExists = true;
+                        //System.out.println(hasItem);
+                    }
                 }
-            }
-            if (cadetExists != true) {
+                if (asNumExists != true) {
+                    //System.out.println("Item does not exist, adding to list");
+                    cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objective1, objective2, objective3,
+                            objective4, classification, asNum, flightDesignation));
+                    attendanceList.add(new Attendance(asNum, ptWeek1, ptWeek2, ptWeek3, ptWeek4, meetWeek1, meetWeek2,
+                            meetWeek3, meetWeek4, techWeek1, techWeek2, techWeek3, techWeek4));
+                    message = "Successful!";
+                    AddOrRemoveCadetController.cadetCount++;
+
+                    cadetFileWriter.write(inputCadetFirstName + ", " + inputCadetLastName + ", " + objective1 + ", "
+                            + objective2 + ", " + objective3 + ", " + objective4 + ", " + classification + ", " + asNum
+                            + ", " + flightDesignation + "\n");
+                    cadetFileWriter.close();
+
+                    attendanceFileWriter.write(asNum + ", " + ptWeek1 + ", " + ptWeek2 + ", " + ptWeek3 + ", " + ptWeek4
+                            + ", " + meetWeek1 + ", " + meetWeek2 + ", " + meetWeek3 + ", " + meetWeek4 + ", "
+                            + techWeek1 + ", " + techWeek2 + ", " + techWeek3 + ", " + techWeek4 + "\n");
+                    attendanceFileWriter.close();
+
+                }
+                if (asNumExists) {
+                    message = "The AS Number \"" + asNum + "\" already belongs to a cadet!";
+                }
+            } else if (AddOrRemoveCadetController.cadetCount == 0) {
+                cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objective1, objective2, objective3,
+                        objective4, classification, asNum, flightDesignation));
+                attendanceList.add(new Attendance(asNum, ptWeek1, ptWeek2, ptWeek3, ptWeek4, meetWeek1, meetWeek2,
+                        meetWeek3, meetWeek4, techWeek1, techWeek2, techWeek3, techWeek4));
                 //System.out.println("Item does not exist, adding to list");
-                cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objective1, objective2, objective3, objective4, classification, asNum, flightDesignation));
                 message = "Successful!";
                 AddOrRemoveCadetController.cadetCount++;
-                
-                cadetFileWriter.write(inputCadetFirstName + ", " +  inputCadetLastName + ", " + objective1 + ", "  + objective2  + ", " + objective3  + ", " + objective4  + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
+                cadetFileWriter.write(inputCadetFirstName + ", " + inputCadetLastName + ", " + objective1 + ", "
+                        + objective2 + ", " + objective3 + ", " + objective4 + ", " + classification + ", " + asNum
+                        + ", " + flightDesignation + "\n");
                 cadetFileWriter.close();
 
-            }
-            if (cadetExists) {
-                message = "Cadet \"" + inputCadetLastName + ", " + inputCadetFirstName + "\" already exists!";
-            }
-        } else if (AddOrRemoveCadetController.cadetCount == 0) {
-            cadets.add(new Cadet(inputCadetFirstName, inputCadetLastName, objective1, objective2, objective3, objective4, classification, asNum, flightDesignation));
-            //System.out.println("Item does not exist, adding to list");
-            message = "Successful!";
-            AddOrRemoveCadetController.cadetCount++;
-            cadetFileWriter.write(inputCadetFirstName + ", " +  inputCadetLastName + ", " + objective1 + ", "  + objective2  + ", " + objective3  + ", " + objective4  + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
-            cadetFileWriter.close();
+                attendanceFileWriter.write(asNum + ", " + ptWeek1 + ", " + ptWeek2 + ", " + ptWeek3 + ", " + ptWeek4
+                        + ", " + meetWeek1 + ", " + meetWeek2 + ", " + meetWeek3 + ", " + meetWeek4 + ", " + techWeek1
+                        + ", " + techWeek2 + ", " + techWeek3 + ", " + techWeek4 + "\n");
+                attendanceFileWriter.close();
 
+            } 
+        }
+        else if (!(asNumMatch)){
+            message = "AS # must be in format \"AS123\"(Case Sensitive)";
+        }
+        else if(!(classificationMatch)) {
+            message = "Incorrect Classification Value";
+        }
+        else if(!(flightDesignationMatch)) {
+            message = "Incorrect Flight Deisgnation Value";
         }
         //for (i = 0; i < needGiveModel.getItemList().size(); i++) {System.out.println(needGiveModel.getItemList().get(i).getItemName() + " " + needGiveModel.getItemList().get(i).getQty());}
         return message;
     }
     
-    public static void deleteCadet(int cadetIndex) throws IOException {
+    public static void deleteCadet(int cadetIndex, String cadetASNum) throws IOException {
         cadets.remove(cadetIndex);
+        int asNumIndex = -1;
+        for (Attendance listASNum : attendanceList) {
+            if (listASNum.getAsNum().equals(cadetASNum)) {
+                asNumIndex = attendanceList.indexOf(listASNum);
+            }
+            
+        }
+        attendanceList.remove(asNumIndex);
+        //System.out.println("Attendance after remove: " + attendanceList);
         FileWriter empty = new FileWriter(cadetsFile);
         empty.write("");
         empty.close();
@@ -160,5 +324,14 @@ public class AddOrRemoveCadetModel {
                 myWriter.write(firstName + ", " +  lastName + ", " + objective1 + ", " + objective2 + ", " + objective3 + ", " + objective4 + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
                 myWriter.close();
         }
+        empty = new FileWriter(attendanceFile);
+        empty.write("");
+        empty.close();
+        for (Attendance asNum : attendanceList) {
+            FileWriter myWriter = new FileWriter(attendanceFile, true);
+            //String asNum = attendanceList.
+            myWriter.write(asNum + "\n");
+            myWriter.close();
+       }
     }
 }

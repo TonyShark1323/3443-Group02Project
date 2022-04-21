@@ -1,6 +1,0 @@
-John, Manning, None, Male, 4, Alpha
-John, Long, None, Male, 5, Beta
-Stacy, Long, None, Female, 7, Alpha
-Logan, Hall, None, Male, 9, Charlie
-Tony, Martinez, None, Male, 12, Charlie
-Ashley, Mann, None, Female, 69, Beta

@@ -1,6 +1,0 @@
-Tony, Martinez, Completed, Completed, Completed, Completed, Male, AS100, Alpha
-Logan, Hall, Not Completed, Not Completed, Not Completed, Not Completed, Male, AS200, Beta
-David, Rico, Not Completed, Completed, Not Completed, Not Completed, Male, AS400, Beta
-Ashley, Mann, Not Completed, Completed, Not Completed, Not Completed, Female, AS500, Charlie
-Jocelyn, Ting, Not Completed, Not Completed, Completed, Not Completed, Female, AS600, Beta
-Camryn, Mikosh, Not Completed, Not Completed, Not Completed, Completed, Female, AS700, Alpha
