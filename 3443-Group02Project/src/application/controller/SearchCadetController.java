@@ -31,9 +31,9 @@ import javafx.stage.Stage;
 
 public class SearchCadetController implements Initializable{
     @FXML private ListView<Cadet> listViewCadets;
-    @FXML private TextField textFieldFirstName, textFieldLastName, textFieldClassification, textFieldFlightDesignation;
+    @FXML private TextField textFieldFirstName, textFieldLastName, textFieldASNum, textFieldClassification, textFieldFlightDesignation;
     @FXML private Label labelInfoDisplay;
-    @FXML private RadioButton rButtonFullName, rButtonFirstName, rButtonLastName, rButtonClassification, rButtonFlightDesignation;
+    @FXML private RadioButton rButtonFullName, rButtonFirstName, rButtonLastName, rButtonASNum,  rButtonClassification, rButtonFlightDesignation;
     
     private Stage stage;
     private Scene scene;
@@ -67,6 +67,10 @@ public class SearchCadetController implements Initializable{
             labelInfoDisplay.setText("");
             setLastName();
         }
+        else if (rButtonASNum.isSelected()) {
+            labelInfoDisplay.setText("");
+            setASNum();
+        }
         else if (rButtonClassification.isSelected()) {
             labelInfoDisplay.setText("");
             setClassification();
@@ -80,6 +84,7 @@ public class SearchCadetController implements Initializable{
     public void setFullName() {
         textFieldFirstName.setVisible(true);
         textFieldLastName.setVisible(true);
+        textFieldASNum.setVisible(false);
         textFieldClassification.setVisible(false);
         textFieldFlightDesignation.setVisible(false);
         populateList();
@@ -88,6 +93,7 @@ public class SearchCadetController implements Initializable{
     public void setFirstName() {
         textFieldFirstName.setVisible(true);
         textFieldLastName.setVisible(false);
+        textFieldASNum.setVisible(false);
         textFieldClassification.setVisible(false);
         textFieldFlightDesignation.setVisible(false);
         populateList();
@@ -96,14 +102,25 @@ public class SearchCadetController implements Initializable{
     public void setLastName() {
         textFieldFirstName.setVisible(false);
         textFieldLastName.setVisible(true);
+        textFieldASNum.setVisible(false);
         textFieldClassification.setVisible(false);
         textFieldFlightDesignation.setVisible(false);
         populateList();
         }
     
+    public void setASNum() {
+        textFieldFirstName.setVisible(false);
+        textFieldLastName.setVisible(false);
+        textFieldASNum.setVisible(true);
+        textFieldClassification.setVisible(false);
+        textFieldFlightDesignation.setVisible(false);
+        populateList();
+    }
+    
     public void setClassification() {
         textFieldFirstName.setVisible(false);
         textFieldLastName.setVisible(false);
+        textFieldASNum.setVisible(false);
         textFieldClassification.setVisible(true);
         textFieldFlightDesignation.setVisible(false);
         populateList();
@@ -112,6 +129,7 @@ public class SearchCadetController implements Initializable{
     public void setFlightDesignation() {
         textFieldFirstName.setVisible(false);
         textFieldLastName.setVisible(false);
+        textFieldASNum.setVisible(false);
         textFieldClassification.setVisible(false);
         textFieldFlightDesignation.setVisible(true);
         populateList();
@@ -155,6 +173,9 @@ public class SearchCadetController implements Initializable{
         }
         else if (rButtonLastName.isSelected()) {
             searchLastName();
+        }
+        else if (rButtonASNum.isSelected()) {
+            searchASNum();
         }
         else if (rButtonClassification.isSelected()) {
             searchClassification();
@@ -250,6 +271,33 @@ public class SearchCadetController implements Initializable{
             //System.out.println(hasItem);
         }
         textFieldLastName.clear();
+    }
+    
+    public void searchASNum() {
+        int matches = 0;
+        String inputASNum = textFieldASNum.getText();
+        System.out.println(inputASNum);
+        listViewCadets.getItems().clear();
+        for (Cadet cadet : AddOrRemoveCadetModel.cadets) {
+            if (cadet.getASNum().equals(inputASNum)) {
+                System.out.println("Match Found: " + cadet);
+                matches++;
+                System.out.println(matches);
+                //labelInventory.setText("Quantity of " + inputItemName + ": " + String.valueOf(item.getQty()));
+                
+                //System.out.println("List before populate " + NeedGiveModel.inventoryItems + "\n");
+
+                listViewCadets.getItems().add(cadet);
+                //System.out.println("Increasing Count");
+
+                //System.out.println(hasItem);
+            }
+        }
+        if (matches == 0) {
+            labelInfoDisplay.setText("Lookup Unsuccessful\n");
+            //System.out.println(hasItem);
+        }
+        textFieldClassification.clear();
     }
     
     public void searchClassification() {
