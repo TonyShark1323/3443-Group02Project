@@ -83,5 +83,10 @@
          </textFill>
       </Button>
       <ListView fx:id="listViewCadets" layoutX="539.0" layoutY="159.0" prefHeight="188.0" prefWidth="206.0" />
+      <Label layoutX="400.0" layoutY="123.0" text="Click a Cadet in the list to see their attendance record" textFill="WHITE">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
