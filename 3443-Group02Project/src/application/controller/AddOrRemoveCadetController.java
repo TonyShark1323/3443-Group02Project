@@ -34,7 +34,7 @@ public class AddOrRemoveCadetController implements Initializable {
     @FXML private CheckBox cbSOB1_1, cbSOB1_2, cbSOB1_3, cbSOB1_4, cbPTWeek1, cbPTWeek2, cbPTWeek3, cbPTWeek4,
                             cbMeetWeek1, cbMeetWeek2, cbMeetWeek3, cbMeetWeek4, 
                             cbTechWeek1, cbTechWeek2, cbTechWeek3, cbTechWeek4;
-    @FXML private Label labelMessage, labelCompletedObjectives, labelCheckBox, labelAttendance, labelCheckBoxAttendance, labelWeek1, labelWeek2, labelWeek3, labelWeek4, labelClassificationTF, labelFlightDesignationTF;
+    @FXML private Label labelMessage, labelCompletedObjectives, labelCheckBox, labelAttendance, labelCheckBoxAttendance, labelWeek1, labelWeek2, labelWeek3, labelWeek4, labelClassificationTF, labelFlightDesignationTF, lableASNum;
     @FXML private Rectangle rect1, rect2, rect3, rect4;
     
     private Stage stage;
@@ -411,6 +411,7 @@ public class AddOrRemoveCadetController implements Initializable {
         textFieldFlightDesignation.setVisible(true);
         labelClassificationTF.setVisible(true);
         labelFlightDesignationTF.setVisible(true);
+        lableASNum.setVisible(true);
     }
     
     /**
@@ -457,6 +458,7 @@ public class AddOrRemoveCadetController implements Initializable {
         textFieldFlightDesignation.setVisible(false);
         labelClassificationTF.setVisible(false);
         labelFlightDesignationTF.setVisible(false);
+        lableASNum.setVisible(false);
     }
     
     /**

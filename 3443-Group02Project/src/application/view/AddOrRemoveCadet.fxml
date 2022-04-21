@@ -470,5 +470,10 @@
             <Font size="15.0" />
          </font>
       </Label>
+      <Label fx:id="lableASNum" layoutX="321.0" layoutY="476.0" text="In Format &quot;AS123&quot;" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
