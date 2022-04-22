@@ -1,10 +1,10 @@
 /**
- * Tony Martinez
- * UTSA ID: bat293
+ * Group 02: Tony Martinez, Logan Hall, David Rico, and Ross Ferrer
  * 
  * Main Controller Class, handles events in the Main scene
  * Most comments with "//" were left in for future testing purposes
  */
+
 package application.controller;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class MainController {
     private Parent root;
     
     /**
-     * When called, will take the user to the NeedGive scene, setup for the request button
+     * When called, will take the user to the Search Cadet scene
      * 
      * @param event button that was clicked
      * @throws throwsIOException
@@ -43,7 +43,7 @@ public class MainController {
     }
 
     /**
-     * When called, will take the user to the Inventory scene
+     * When called, will take the user to the WingObjectives scene
      * 
      * @param event button that was clicked
      * @throws throwsIOException
@@ -58,7 +58,7 @@ public class MainController {
     }
     
     /**
-     * When called, will take the user to the Inventory scene
+     * When called, will take the user to the Wing Attendance scene
      * 
      * @param event button that was clicked
      * @throws throwsIOException
@@ -73,7 +73,7 @@ public class MainController {
     }
     
     /**
-     * When called, will take the user to the Inventory scene
+     * When called, will take the user to the AddOrRemoveCadet scene, setup for adding a cadet
      * 
      * @param event button that was clicked
      * @throws throwsIOException
@@ -82,7 +82,7 @@ public class MainController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/view/AddOrRemoveCadet.fxml"));
         root = loader.load();
         AddOrRemoveCadetController cadetController = loader.getController();
-        cadetController.setAdd();
+        cadetController.setAddCadet();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -90,7 +90,7 @@ public class MainController {
     }
     
     /**
-     * When called, will take the user to the Inventory scene
+     * When called, will take the user to the AddOrRemoveCadet scene, setup for removing a cadet
      * 
      * @param event button that was clicked
      * @throws throwsIOException
@@ -99,7 +99,7 @@ public class MainController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/view/AddOrRemoveCadet.fxml"));
         root = loader.load();
         AddOrRemoveCadetController cadetController = loader.getController();
-        cadetController.setRemove();
+        cadetController.setDeleteCadet();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

@@ -1,3 +1,10 @@
+/**
+ * Group 02: Tony Martinez, Logan Hall, David Rico, and Ross Ferrer
+ * 
+ * Attendance object class
+ * Most comments with "//" were left in for future testing purposes
+ */
+
 package application;
 
 public class Attendance {
@@ -24,7 +31,7 @@ public class Attendance {
         this.techTrainingWeek4 = techTrainingWeek4;
     }
     
-    /*----------------------- AS Num -----------------------*/
+    /*----------------------- AS Num Setters and Getters -----------------------*/
     public String getAsNum() {
         return this.asNum;
     }
@@ -32,7 +39,7 @@ public class Attendance {
         this.asNum = asNum;
     }
     
-    /*----------------------- Physical Training -----------------------*/
+    /*----------------------- Physical Training Setters and Getters -----------------------*/
     // Week 1
     public String getPtWeek1() {
         return this.ptWeek1;
@@ -65,7 +72,7 @@ public class Attendance {
         this.ptWeek4 = ptWeek4;
     }
     
-    /*----------------------- Flight Meeting -----------------------*/
+    /*----------------------- Flight Meeting Setters and Getters -----------------------*/
     // Week 1
     public String getMeetWeek1() {
         return this.meetWeek1;
@@ -98,7 +105,7 @@ public class Attendance {
         this.meetWeek4 = meetWeek4;
     }
     
-    /*----------------------- Tech Training -----------------------*/
+    /*----------------------- Tech Training Setters and Getters -----------------------*/
     // Week 1
     public String getTechTrainingWeek1() {
         return this.techTrainingWeek1;
@@ -132,7 +139,7 @@ public class Attendance {
     }
     
     /**
-     * Used to override the default output of ararylists
+     * Used to override the default output
      */
     @Override
     public String toString() {

@@ -1,3 +1,10 @@
+/**
+ * Group 02: Tony Martinez, Logan Hall, David Rico, and Ross Ferrer
+ * 
+ * AddOrRemoveCadet Controller Class, handles all actions on the AddOrRemoveCadet scene
+ * Most comments with "//" were left in for future testing purposes
+ */
+
 package application.controller;
 
 import java.io.File;
@@ -66,6 +73,9 @@ public class AddOrRemoveCadetController implements Initializable {
         });  
     }
     
+    /**
+     * Fills the list view on the AddOrRemoveCadet screen
+     */
     void populateList() {
         listViewCadets.getItems().clear();
         AddOrRemoveCadetModel.readCadetsFile();
@@ -85,14 +95,21 @@ public class AddOrRemoveCadetController implements Initializable {
     public void getAction() {
         if(rButtonAdd.isSelected()) {
             labelMessage.setText("");
-            setAdd();
+            setAddCadet();
         }
         else if (rButtonRemove.isSelected()) {
             labelMessage.setText("");
-            setRemove();
+            setDeleteCadet();
         }
     }
     
+    /**
+     * Called when the Delete Cadet button is clicked
+     * 
+     * @param index used to hold the index of the selected cadet in the list view
+     * @param asNum used to hold the asNum of the selected currentCadet
+     * @throws IOException
+     */
     public void remove() throws IOException {
         System.out.println("Remove Clicked");
          if (currentCadet != null) {
@@ -105,10 +122,14 @@ public class AddOrRemoveCadetController implements Initializable {
     }
     
     /**
-     * Called when the donate button is clicked
+     * Called when the Add Cadet button is clicked
      * 
-     * @param inputItemName String of text from the item text field
-     * @param inputQty String of text from the item quantity filed, parsed as an integer
+     * @param inputCadetFirstName String of text from the first name field
+     * @param inputCadetFirstName String of text from the last name field
+     * @param inputObjective(n) calls on a method to determine the completion of the nth objective
+     * @param ptWeek(n) calls on a method to determine the attendance of the nth ptWeek
+     * @param meetWeek(n) calls on a method to determine the attendance of the nth meetWeek
+     * @param techWeek(n) calls on a method to determine the attendance of the nth techWeek
      * @throws IOException
      */
     public void add() throws IOException {
@@ -177,6 +198,7 @@ public class AddOrRemoveCadetController implements Initializable {
         }
     }
     
+    /*------------------ Methods to determine completion of objectives ------------------*/
     public String getObjective1() {
         String obj1 = "";
         if (cbSOB1_1.isSelected()) {
@@ -225,6 +247,7 @@ public class AddOrRemoveCadetController implements Initializable {
         return obj4;
     }
     
+    /*------------------ Methods to determine attendance of ptWeek(n) ------------------*/
     public String getPTWeek1() {
         String pt1 = "";
         if (cbPTWeek1.isSelected()) {
@@ -273,6 +296,7 @@ public class AddOrRemoveCadetController implements Initializable {
         return pt4;
     }
     
+    /*------------------ Methods to determine attendance of meetWeek(n) ------------------*/
     public String getMeetWeek1() {
         String m1 = "";
         if (cbMeetWeek1.isSelected()) {
@@ -321,6 +345,7 @@ public class AddOrRemoveCadetController implements Initializable {
         return m4;
     }
     
+    /*------------------ Methods to determine attendance of techWeek(n) ------------------*/
     public String getTechWeek1() {
         String t1 = "";
         if (cbTechWeek1.isSelected()) {
@@ -369,8 +394,10 @@ public class AddOrRemoveCadetController implements Initializable {
         return t4;
     }
 
-   
-    public void setAdd() {
+    /**
+     * Sets the scene for the add cadet button
+     */
+    public void setAddCadet() {
         buttonAdd.setVisible(true);
         buttonRemove.setVisible(false);
         rButtonAdd.setSelected(true);
@@ -415,9 +442,9 @@ public class AddOrRemoveCadetController implements Initializable {
     }
     
     /**
-     * Sets the scene for the need button
+     * Sets the scene for the delete cadet button
      */
-    public void setRemove() {
+    public void setDeleteCadet() {
         buttonRemove.setVisible(true);
         buttonAdd.setVisible(false);
         rButtonRemove.setSelected(true);

@@ -1,8 +1,7 @@
 /**
- * Tony Martinez
- * UTSA ID: bat293
+ * Group 02: Tony Martinez, Logan Hall, David Rico, and Ross Ferrer
  * 
- * Inventory Controller Class, handles all actions on the 
+ * SearchCadet Controller Class, handles all actions on the SearchCadet scene
  * Most comments with "//" were left in for future testing purposes
  */
 
@@ -39,6 +38,30 @@ public class SearchCadetController implements Initializable{
     private Scene scene;
     Cadet currentCadet;
     String currentCadetName;
+    
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        AddOrRemoveCadetController.cadetCount = 0;
+        populateList();
+        listViewCadets.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Cadet>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Cadet> arg0, Cadet arg1, Cadet arg2) {
+                try {
+                    currentCadet = listViewCadets.getSelectionModel().getSelectedItem();
+                    labelInfoDisplay.setText("Cadet Name: " + currentCadet.getCadetFullName() + "\n\n" 
+                    + "Completed Objectives: \n" + currentCadet.getObjectives()
+                    + "\nClassification: " + currentCadet.getClassification() + "\n\n"
+                    + "AS #: " + currentCadet.getASNum() + "\n\n"
+                    + "Flight Designation: " + currentCadet.getFlightDesignation() + "\n");
+                } 
+                catch (NullPointerException e) {
+
+                }       
+            }   
+        });
+    }
+    
     /**
      * Fills the list view on the inventory screen
      */
@@ -54,6 +77,10 @@ public class SearchCadetController implements Initializable{
         }
     }
     
+    /**
+     * Called when any radio button is selected
+     * and calls on corresponding methods
+     */
     public void getAction() {
         if(rButtonFullName.isSelected()) {
             labelInfoDisplay.setText("");
@@ -81,6 +108,9 @@ public class SearchCadetController implements Initializable{
         }
     }
     
+    /**
+     * Sets up text boxes for searching by full name
+     */
     public void setFullName() {
         textFieldFirstName.setVisible(true);
         textFieldLastName.setVisible(true);
@@ -90,6 +120,9 @@ public class SearchCadetController implements Initializable{
         populateList();
     }
     
+    /**
+     * Sets up text boxes for searching by first name
+     */
     public void setFirstName() {
         textFieldFirstName.setVisible(true);
         textFieldLastName.setVisible(false);
@@ -99,6 +132,9 @@ public class SearchCadetController implements Initializable{
         populateList();
         }
     
+    /**
+     * Sets up text boxes for searching by last name
+     */
     public void setLastName() {
         textFieldFirstName.setVisible(false);
         textFieldLastName.setVisible(true);
@@ -108,6 +144,9 @@ public class SearchCadetController implements Initializable{
         populateList();
         }
     
+    /**
+     * Sets up text boxes for searching by ASNum
+     */
     public void setASNum() {
         textFieldFirstName.setVisible(false);
         textFieldLastName.setVisible(false);
@@ -117,6 +156,9 @@ public class SearchCadetController implements Initializable{
         populateList();
     }
     
+    /**
+     * Sets up text boxes for searching by classification
+     */
     public void setClassification() {
         textFieldFirstName.setVisible(false);
         textFieldLastName.setVisible(false);
@@ -126,6 +168,9 @@ public class SearchCadetController implements Initializable{
         populateList();
     }
     
+    /**
+     * Sets up text boxes for searching by flight designation
+     */
     public void setFlightDesignation() {
         textFieldFirstName.setVisible(false);
         textFieldLastName.setVisible(false);
@@ -133,31 +178,6 @@ public class SearchCadetController implements Initializable{
         textFieldClassification.setVisible(false);
         textFieldFlightDesignation.setVisible(true);
         populateList();
-    }
-    
-    
-    
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        AddOrRemoveCadetController.cadetCount = 0;
-        populateList();
-        listViewCadets.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Cadet>() {
-
-            @Override
-            public void changed(ObservableValue<? extends Cadet> arg0, Cadet arg1, Cadet arg2) {
-                try {
-                    currentCadet = listViewCadets.getSelectionModel().getSelectedItem();
-                    labelInfoDisplay.setText("Cadet Name: " + currentCadet.getCadetFullName() + "\n\n" 
-                    + "Completed Objectives: \n" + currentCadet.getObjectives()
-                    + "\nClassification: " + currentCadet.getClassification() + "\n\n"
-                    + "AS #: " + currentCadet.getASNum() + "\n\n"
-                    + "Flight Designation: " + currentCadet.getFlightDesignation() + "\n");
-                } 
-                catch (NullPointerException e) {
-
-                }       
-            }   
-        });
     }
     
     /**
@@ -185,6 +205,13 @@ public class SearchCadetController implements Initializable{
         }
     }
     
+    /**
+     * Populates the list view with cadets matching the searched full name
+     * 
+     * @param matches holds the number of matches in the array list according to the searched criterion
+     * @param inputCadetFirstName the text received from the First Name Text Box
+     * @param inputCadetLastName the text received from the Last Name Text Box
+     */
     public void searchFullName() {
         int matches = 0;
         if (!(textFieldFirstName.getText().isEmpty() || textFieldLastName.getText().isEmpty())) {
@@ -219,6 +246,12 @@ public class SearchCadetController implements Initializable{
         textFieldLastName.clear();
     }
     
+    /**
+     * Populates the list view with cadets matching the searched first name
+     * 
+     * @param matches holds the number of matches in the array list according to the searched criterion
+     * @param inputCadetFirstName the text received from the First Name Text Box
+     */
     public void searchFirstName() {
         int matches = 0;
         String inputCadetFirstName = textFieldFirstName.getText();
@@ -246,6 +279,12 @@ public class SearchCadetController implements Initializable{
         textFieldFirstName.clear();
     }
     
+    /**
+     * Populates the list view with cadets matching the searched last name
+     * 
+     * @param matches holds the number of matches in the array list according to the searched criterion
+     * @param inputCadetLastName the text received from the Last Name Text Box
+     */
     public void searchLastName() {
         int matches = 0;
         String inputCadetLastName = textFieldLastName.getText();
@@ -273,6 +312,12 @@ public class SearchCadetController implements Initializable{
         textFieldLastName.clear();
     }
     
+    /**
+     * Populates the list view with cadets matching the searched AS #
+     * 
+     * @param matches holds the number of matches in the array list according to the searched criterion
+     * @param inputASNum the text received from the AS # Text Box
+     */
     public void searchASNum() {
         int matches = 0;
         String inputASNum = textFieldASNum.getText();
@@ -300,6 +345,12 @@ public class SearchCadetController implements Initializable{
         textFieldClassification.clear();
     }
     
+    /**
+     * Populates the list view with cadets matching the searched classification
+     * 
+     * @param matches holds the number of matches in the array list according to the searched criterion
+     * @param inputClassification the text received from the Classification Text Box
+     */
     public void searchClassification() {
         int matches = 0;
         String inputClassification = textFieldClassification.getText();
@@ -327,6 +378,12 @@ public class SearchCadetController implements Initializable{
         textFieldClassification.clear();
     }
     
+    /**
+     * Populates the list view with cadets matching the searched flight designation
+     * 
+     * @param matches holds the number of matches in the array list according to the searched criterion
+     * @param inputFlightDesignation the text received from the Flight Designation Text Box
+     */
     public void searchFlightDesignation() {
         int matches = 0;
         String inputFlightDesignation = textFieldFlightDesignation.getText();

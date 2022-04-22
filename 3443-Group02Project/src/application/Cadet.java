@@ -1,8 +1,7 @@
 /**
- * Tony Martinez
- * UTSA ID: bat293
+ * Group 02: Tony Martinez, Logan Hall, David Rico, and Ross Ferrer
  * 
- * Item object class
+ * Cadet object class
  * Most comments with "//" were left in for future testing purposes
  */
 
@@ -20,7 +19,7 @@ public class Cadet {
     String objective3;
     String objective4;
     /**
-     * Constructor
+     * Cadet Constructor
      */
     public Cadet(String cadetFirstName, String cadetLastName, String objective1, String objective2, String objective3, String objective4,  String classification, String asNum, String flightDesignation) {
         this.cadetFirstName = cadetFirstName;
@@ -65,6 +64,9 @@ public class Cadet {
     
     /**
      * Objectives Setter and Getters
+     * 
+     * getObjective(n) will return the Completed or Not Completed value
+     * getObjectve(n) name will return the actual name of an objective if it has been completed
      */
     public void setObjective1(String objective1){
         this.objective1 = objective1;

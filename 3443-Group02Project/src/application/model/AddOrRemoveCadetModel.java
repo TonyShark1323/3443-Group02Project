@@ -1,8 +1,7 @@
 /**
- * Tony Martinez
- * UTSA ID: bat293
+ * Group 02: Tony Martinez, Logan Hall, David Rico, and Ross Ferrer
  * 
- * NeedGive Model Class, contains methods to perform functions for the NeedGiveController class
+ * AddOrRemoveCadet Model Class, contains methods to perform functions for the AddOrRemoveCadet controller class
  * Most comments with "//" were left in for future testing purposes
  */
 
@@ -26,15 +25,15 @@ public class AddOrRemoveCadetModel {
     public static ArrayList<Attendance> attendanceList = new ArrayList<Attendance>();
     public static String cadetsFile = "data/cadets.txt";
     public static String attendanceFile = "data/attendance.txt";
-    
+
     /**
-     * Will check if there is an item file and make one if not
+     * Will check if there is a cadet file and make one if not
      * 
      * @param file A file set to what the cadetsFile should be
      */
     public static void createCadetsFile() {
         try {
-            
+
             File file = new File(cadetsFile);
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getName());
@@ -44,19 +43,19 @@ public class AddOrRemoveCadetModel {
             }
         } 
         catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
-    
+
     /**
-     * Will check if there is an item file and make one if not
+     * Will check if there is an attendance file and make one if not
      * 
-     * @param file A file set to what the cadetsFile should be
+     * @param file A file set to what the attendanceFile should be
      */
     public static void createAttendanceFile() {
         try {
-            
+
             File file = new File(attendanceFile);
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getName());
@@ -66,11 +65,17 @@ public class AddOrRemoveCadetModel {
             }
         } 
         catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Will read the attendance input text file and parse the items into an array list
+     * 
+     * @param itemFileReader A buffered reader used to read the attendance input file
+     * @param line A string used to read the file line by line
+     */
     public static void readAttendanceFile() {
         createAttendanceFile();
         attendanceList.clear();
@@ -97,8 +102,8 @@ public class AddOrRemoveCadetModel {
                 String techTrainingWeek4 = row[12];
                 ////System.out.println("\t");
                 attendanceList.add(new Attendance(asNum, ptWeek1, ptWeek2, ptWeek3, ptWeek4, 
-                                                meetWeek1, meetWeek2, meetWeek3, meetWeek4, 
-                                                techTrainingWeek1, techTrainingWeek2, techTrainingWeek3, techTrainingWeek4));
+                        meetWeek1, meetWeek2, meetWeek3, meetWeek4, 
+                        techTrainingWeek1, techTrainingWeek2, techTrainingWeek3, techTrainingWeek4));
             }
             //System.out.println(attendanceList);
         }
@@ -110,17 +115,17 @@ public class AddOrRemoveCadetModel {
                 attendanceFileReader.close();
             } 
             catch (IOException e) {
-                  e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
-    
+
     /**
-     * Checks pattern of input ID
+     * Checks pattern of ASNum
      * 
-     * @param patternMatch the value returned, true if input ID matches required pattern
-     * @param pattern the designated pattern all input ID's must match to be added
-     * @param matcher checks if the input ID is a match to the pattern
+     * @param patternMatch the value returned, true if ASNum matches required pattern
+     * @param pattern the designated pattern all input ASNum must match to be added
+     * @param matcher checks if the ASNum is a match to the pattern
      * @param matchFound true if a match was found
      * @return patternMatch returns the boolean patternMatch 
      */
@@ -131,13 +136,19 @@ public class AddOrRemoveCadetModel {
         boolean matchFound = matcher.find();
         //System.out.println("ID Length " + userID.length());
         if(matchFound && inputASNum.length() == 5) {
-          patternMatch = true;
+            patternMatch = true;
         } else {
-          patternMatch = false;
+            patternMatch = false;
         }
         return patternMatch;
     }
-    
+
+    /**
+     * Checks the input classification for one of four allowed Classification values
+     * 
+     * @param clasificationCheck the value returned, true if classification matches an allowed value
+     * @return clasificationCheck returns the boolean clasificationCheck 
+     */
     public static boolean classificationChecker(String classification) {
         boolean classificationCheck;
         if (classification.equals("IMT") || classification.equals("FTP") || classification.equals("ICL") || classification.equals("SCL")) {
@@ -148,7 +159,13 @@ public class AddOrRemoveCadetModel {
         }
         return classificationCheck;
     }
-    
+
+    /**
+     * Checks the input flightDesignation for one of three allowed flight designation values
+     * 
+     * @param flightDesignationCheck the value returned, true if flightDesignarion matches an allowed value
+     * @return flightDesignationCheck returns the boolean flightDesignationCheck 
+     */
     public static boolean flightDesignationChecker(String flightDesignation) {
         boolean flightDesignationCheck;
         if (flightDesignation.equals("Alpha") || flightDesignation.equals("Beta") || flightDesignation.equals("Gamma")) {
@@ -159,11 +176,11 @@ public class AddOrRemoveCadetModel {
         }
         return flightDesignationCheck;
     }
-    
+
     /**
-     * Will read the item input text file and parse the items into an array list
+     * Will read the cadet input text file and parse the items into an array list
      * 
-     * @param itemFileReader A buffered reader used to read the item input file
+     * @param itemFileReader A buffered reader used to read the cadet input file
      * @param line A string used to read the file line by line
      */
     public static void readCadetsFile() {
@@ -203,18 +220,21 @@ public class AddOrRemoveCadetModel {
                 itemFileReader.close();
             } 
             catch (IOException e) {
-                  e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
-    
+
     /**
-     * Handles adding an item to the inventory
+     * Handles adding a cadet to the cadet list and attendance file
      * @param inputFlightDesignation 
      * 
      * @param message String used to hold the message that will be returned and is used to set label text
-     * @param containsItem used to determine if the list contains the specified item or not
-     * @param itemFileWriter file writer used to write to the items file
+     * @param asNumMatch used to check if the given asNum is correct format
+     * @param classificationMatch used to check if the given classification is an allowed choice
+     * @param flightDesignationMatch used to check if the given flightDesignation is an allowed choice
+     * @param cadetFileWriter file writer used to write to the cadet file
+     * @param attendanceFileWriter file writer used to write to the attendance file
      * @return message returns the designated message 
      */
     public static String addCadet(String inputCadetFirstName, String inputCadetLastName, 
@@ -294,7 +314,14 @@ public class AddOrRemoveCadetModel {
         //for (i = 0; i < needGiveModel.getItemList().size(); i++) {System.out.println(needGiveModel.getItemList().get(i).getItemName() + " " + needGiveModel.getItemList().get(i).getQty());}
         return message;
     }
-    
+
+    /**
+     * Handles removing a cadet to the cadet list and attendance file
+     * 
+     * @param asNumIndex holds the index value of the current listASNum in the foreach loop
+     * @param empty filewrite used to clear a text file
+     * @param myWriter file writer used to write to the cadet and attendance files
+     */
     public static void deleteCadet(int cadetIndex, String cadetASNum) throws IOException {
         cadets.remove(cadetIndex);
         int asNumIndex = -1;
@@ -302,7 +329,7 @@ public class AddOrRemoveCadetModel {
             if (listASNum.getAsNum().equals(cadetASNum)) {
                 asNumIndex = attendanceList.indexOf(listASNum);
             }
-            
+
         }
         attendanceList.remove(asNumIndex);
         //System.out.println("Attendance after remove: " + attendanceList);
@@ -321,8 +348,8 @@ public class AddOrRemoveCadetModel {
             String classification = cadets.get(index).getClassification();
             String asNum = cadets.get(index).getASNum();
             String flightDesignation = cadets.get(index).getFlightDesignation();
-                myWriter.write(firstName + ", " +  lastName + ", " + objective1 + ", " + objective2 + ", " + objective3 + ", " + objective4 + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
-                myWriter.close();
+            myWriter.write(firstName + ", " +  lastName + ", " + objective1 + ", " + objective2 + ", " + objective3 + ", " + objective4 + ", " + classification + ", " + asNum + ", " + flightDesignation + "\n");
+            myWriter.close();
         }
         empty = new FileWriter(attendanceFile);
         empty.write("");
@@ -332,6 +359,6 @@ public class AddOrRemoveCadetModel {
             //String asNum = attendanceList.
             myWriter.write(asNum + "\n");
             myWriter.close();
-       }
+        }
     }
 }

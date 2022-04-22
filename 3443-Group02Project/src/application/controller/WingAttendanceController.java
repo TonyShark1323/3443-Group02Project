@@ -1,3 +1,10 @@
+/**
+ * Group 02: Tony Martinez, Logan Hall, David Rico, and Ross Ferrer
+ * 
+ * WingAttendance Controller Class, handles all actions on the WingAttendance scene
+ * Most comments with "//" were left in for future testing purposes
+ */
+
 package application.controller;
 
 import java.io.File;
@@ -26,6 +33,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class WingAttendanceController implements Initializable{
+
     @FXML private ListView<Cadet> listViewCadets;
     @FXML private TableView<Attendance> tableView;
     @FXML private TableColumn<Attendance, String> ptWeek1Column;
@@ -40,12 +48,15 @@ public class WingAttendanceController implements Initializable{
     @FXML private TableColumn<Attendance, String> techWeek2Column;
     @FXML private TableColumn<Attendance, String> techWeek3Column;
     @FXML private TableColumn<Attendance, String> techWeek4Column;
-    
+
     private Stage stage;
     private Scene scene;
     public static int asNumCount = 0;
     Cadet currentCadet;
-    
+
+    /**
+     * Used to populate the scene list view
+     */
     void populateList() {
         listViewCadets.getItems().clear();
         AddOrRemoveCadetModel.readCadetsFile();
@@ -58,13 +69,13 @@ public class WingAttendanceController implements Initializable{
             AddOrRemoveCadetController.cadetCount++;
         }
     }
-    
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         AddOrRemoveCadetController.cadetCount = 0;
         asNumCount = 0;
         populateList();
-        
+
         ptWeek1Column.setCellValueFactory(new PropertyValueFactory<Attendance, String>("ptWeek1"));
         ptWeek2Column.setCellValueFactory(new PropertyValueFactory<Attendance, String>("ptWeek2"));
         ptWeek3Column.setCellValueFactory(new PropertyValueFactory<Attendance, String>("ptWeek3"));
@@ -77,7 +88,7 @@ public class WingAttendanceController implements Initializable{
         techWeek2Column.setCellValueFactory(new PropertyValueFactory<Attendance, String>("techTrainingWeek2"));
         techWeek3Column.setCellValueFactory(new PropertyValueFactory<Attendance, String>("techTrainingWeek3"));
         techWeek4Column.setCellValueFactory(new PropertyValueFactory<Attendance, String>("techTrainingWeek4"));
-        
+
         listViewCadets.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Cadet>() {
 
             @Override
@@ -87,17 +98,18 @@ public class WingAttendanceController implements Initializable{
                     tableView.setItems(getAttendance());
                 } 
                 catch (NullPointerException e) {
-
                 }       
             }   
         });
-        
-        
-        
-        //tableView.setItems(getAttendance());
     }
-    
-    
+
+
+    /**
+     * When called, will look for the current cadets ASNum in the attendance file, and will
+     * return an observable list with the current cadets attendance record
+     * 
+     * @return
+     */
     public ObservableList<Attendance> getAttendance() {
         ObservableList<Attendance> attendance = FXCollections.observableArrayList();
         for (Attendance asNum : AddOrRemoveCadetModel.attendanceList) {
@@ -106,10 +118,10 @@ public class WingAttendanceController implements Initializable{
                 attendance.add(asNum);
             }
         }
-        
+
         return attendance;
     }
-    
+
     /**
      * When called, will take the user to the home scene
      * 

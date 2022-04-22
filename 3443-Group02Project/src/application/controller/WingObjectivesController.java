@@ -1,3 +1,10 @@
+/**
+ * Group 02: Tony Martinez, Logan Hall, David Rico, and Ross Ferrer
+ * 
+ * WingObjectives Controller Class, handles all actions on the WingObjectives scene
+ * Most comments with "//" were left in for future testing purposes
+ */
+
 package application.controller;
 
 import java.io.File;
@@ -52,6 +59,12 @@ public class WingObjectivesController implements Initializable{
         tableView.setItems(getCadets());
     }
     
+    /**
+     * When called, will add every cadet from the arraylist into an observalbe list
+     * of cadets, which is returned and used to populate the table
+     * 
+     * @return
+     */
     public ObservableList<Cadet> getCadets() {
         ObservableList<Cadet> cadets = FXCollections.observableArrayList();
         for (Cadet cadet: AddOrRemoveCadetModel.cadets) {
